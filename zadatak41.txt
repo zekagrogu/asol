@@ -1,0 +1,39 @@
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+using namespace std;
+
+float deljenje(float a, float b)
+{
+    float temp;
+    if(b==0) throw 1;
+    if(b==1) throw 2;
+    if(b==a) throw "Deljenje istim brojem";
+    temp=a/b;
+    return temp;
+}
+
+int main()
+{
+    float a, b, rez;
+    printf("Unesi realan broj\n");
+    scanf("%f", &a);
+    printf("Unesi realan broj\n");
+    scanf("%f", &b);
+    try
+    {
+        rez=deljenje(a,b);
+        printf("Kolicnik brojeva je %10.2f", rez);
+    }
+    catch(int p)
+    {
+        if(p==1) printf("Zabranjeno deljenje nulom");
+        if(p==2) printf("Deljenjem dobijate isti broj");
+    }
+    catch(const char *provera)
+    {
+        printf("%s", provera);
+    }
+    return 0;
+}
