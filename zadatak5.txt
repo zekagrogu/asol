@@ -1,0 +1,17 @@
+#include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+using namespace std;
+
+int main()
+{
+    int i, x;
+    srand(time(0));
+    for(i=0;i<10;i++)
+    {
+        x=rand()%100;
+        printf("\n%d", x);
+    }
+    return 0;
+}

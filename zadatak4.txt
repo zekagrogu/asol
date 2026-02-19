@@ -1,0 +1,21 @@
+#include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
+using namespace std;
+
+int main()
+{
+    int i, n;
+    float  x, s=0, sv=0;
+    printf("\nUnesi broj");
+    scanf("%d", &n);
+    for(i=0;i<n;i++)
+    {
+        printf("Unesi realan broj");
+        scanf("%f", &x);
+        s+=x;
+    }
+    sv=s/n;
+    printf("Srenja vrednost unetih realnih brojeva je %.2f", sv);
+    return 0;
+}

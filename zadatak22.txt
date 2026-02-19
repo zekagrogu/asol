@@ -1,0 +1,43 @@
+#include <iostream>
+#include<stdio.h>
+#include<stdlib.h>
+#include<list>
+using namespace std;
+
+int main()
+{
+    list<int> brojevi;
+    for(int i=0;i<=10;i++)
+    {
+        brojevi.push_back(i*10);
+    }
+    brojevi.push_back(658);
+    brojevi.push_back(234);
+    printf("\nSadrzaj liste:\n\n");
+    int z=1;
+    list<int>::iterator k;
+    for(k=brojevi.begin();k!=brojevi.end();++k)
+    {
+        printf("\n%d clan liste je %d", z, *k);
+        z++;
+    }
+    k=brojevi.begin();
+    printf("\n\nPocetak je %d\n",*k);
+    advance(k,4);
+    printf("\nClan je %d", *k);
+    advance(k,7);
+    printf("\nClan je %d", *k);
+    *k=800;
+    printf("\nClan je %d", *k);
+    advance(k,-5);
+    *k=9999;
+    advance(k,-2);
+    brojevi.erase(k);
+    z=1;
+    for(k=brojevi.begin();k!=brojevi.end();++k)
+    {
+        printf("\n%d clan liste je %d", z, *k);
+        z++;
+    }
+    return 0;
+}

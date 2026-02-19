@@ -1,0 +1,39 @@
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+using namespace std;
+struct tacka{
+int x,y;
+};
+int main()
+{
+    FILE *pok;
+    tacka a;
+    srand(time(0));
+    int i,x,mini;
+    pok=fopen("tacke.bin","wb");
+    for(i=0;i<10;i++)
+    {
+        a.x=rand()%100;
+        a.y=rand()%100;
+        fwrite(&a,sizeof(a),1,pok);
+    }
+    fclose(pok);
+    i=1;
+    pok=fopen("tacke.bin", "rb");
+    while(feof(pok)==0)
+    {
+        fread(&a,sizeof(a),1,pok);
+        if(feof(pok)==0) printf("%d. tacka je x=%d i y=%d \n",i,a.x,a.y);
+        i++;
+    }
+    mini=a.x*a.y;
+    for(i=0;i<10;i++){
+    if(a.x*a.y<mini)
+        mini=a.x*a.y;
+        }
+        printf("Najmanji clan je %d",mini);
+    fclose(pok);
+    return 0;
+}

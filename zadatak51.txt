@@ -1,0 +1,65 @@
+#include <iostream>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+using namespace std;
+
+class bankovniracun{
+protected:
+    float stanje;
+public:
+    void unesistanje()
+    {
+        printf("Unesi pocetno stanje\n");
+        scanf("%f",&stanje);
+    }
+    void ispisstanja()
+    {
+        printf("Stanje RSD racuna je %10.2f\n", stanje);
+    }
+    void uplata(float a)
+    {
+        stanje+=a;
+        printf("Uplata od %10.2f\n proknjizena", a);
+    }
+    void isplata(float a)
+    {
+        stanje-=a;
+        printf("Isplata od %10.2f\n proknjizena", a);
+    }
+};
+
+class devizniracun:public bankovniracun
+{
+private:
+    float kurs;
+public:
+    void unesikurs()
+    {
+        printf("Unesi kurs RSD/EUR\n" );
+        scanf("%f",&kurs);
+    }
+    void ispisstanjaeur()
+    {
+        printf("Stanje EUR racuna je %10.2f\n", stanje/kurs);
+    }
+};
+
+int main()
+{
+    devizniracun y;
+    float a=1;
+    y.unesistanje();
+    y.unesikurs();
+    do{
+        printf("EUR racun\n");
+        printf("Unesi iznos uplate\n");
+        scanf("%f", &a);
+        y.uplata(a);
+        printf("Unesi iznos isplate\n");
+        scanf("%f", &a);
+        y.isplata(a);
+        y.ispisstanjaeur();
+    }while(a!=0);
+    return 0;
+}

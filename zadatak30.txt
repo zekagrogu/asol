@@ -1,0 +1,27 @@
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+using namespace std;
+
+class primer{
+public:
+    static int broj;
+    void brojac(){
+    broj++;
+    }
+    };
+    int primer::broj=10;
+int main()
+{
+    primer a,b;
+    printf("\n broj je: %d",a.broj);
+    printf("\n broj je: %d",b.broj);
+    a.brojac();
+    printf("\n broj je: %d",a.broj);
+    printf("\n broj je: %d",b.broj);
+    b.brojac();
+    printf("\n broj je: %d",a.broj);
+    printf("\n broj je: %d",b.broj);
+    return 0;
+}

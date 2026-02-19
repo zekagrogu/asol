@@ -1,0 +1,37 @@
+#include <iostream>
+
+
+using namespace std;
+
+
+class primer{
+private:
+    int x;
+public:
+    void set(int a)
+    {
+    this->x=a;
+    }
+    int get()
+    {
+        return 2*this->x;
+    }
+};
+int main()
+{
+    primer test,test1,test2;
+    int b;
+    test.set(3);
+    cout << test.get() << endl;
+    test1.set(5);
+    cout << test1.get() << endl;
+    cout <<"Unesi neki broj"<<endl;
+    cin >>b;
+    test2.set(b);
+    cout <<test2.get()<<endl;
+    float z;
+    cout <<"Unesi neki realan broj"<<endl;
+    cin >>z;
+    cout <<"UNELI STE BROJ: "<<z<<endl;
+    return 0;
+}

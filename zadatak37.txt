@@ -1,0 +1,41 @@
+#include <stdio.h>
+class Bazen
+{
+private:
+    float duzina;
+    float sirina;
+    float dubina;
+public:
+    void ucitaj()
+    {
+        printf("Unesi duzinu bazena: ");
+        scanf("%f", &duzina);
+        printf("Unesi sirinu bazena: ");
+        scanf("%f", &sirina);
+        printf("Unesi dubinu bazena: ");
+        scanf("%f", &dubina);
+    }
+    float zapremina()
+    {
+        return duzina * sirina * dubina;
+    }
+};
+int main()
+{
+    Bazen Mika, Zika;
+    printf("Podaci za Mikin bazen:\n");
+    Mika.ucitaj();
+    printf("\nPodaci za Zikin bazen:\n");
+    Zika.ucitaj();
+    float zapMika = Mika.zapremina();
+    float zapZika = Zika.zapremina();
+    printf("\nZapremina Mikinog bazena je: %.2f\n", zapMika);
+    printf("Zapremina Zikinog bazena je: %.2f\n", zapZika);
+    if (zapMika > zapZika)
+        printf("\nMika ima veci bazen.\n");
+    else if (zapZika > zapMika)
+        printf("\nZika ima veci bazen.\n");
+    else
+        printf("\nBazeni su iste velicine.\n");
+    return 0;
+}

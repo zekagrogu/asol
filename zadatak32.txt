@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+class telo
+{
+private:
+    float masa, povrsina;
+public:
+    telo(float m, float p)
+    {
+        masa = m;
+        povrsina = p;
+    }
+    float pritisak()
+    {
+        return masa * 9.81 / povrsina;
+    }
+};
+
+int main()
+{
+    telo a(50, 0.25);
+    printf("Pritisak tela na podlogu je %.2f N/m^2\n", a.pritisak());
+    float p1, p2;
+    printf("Unesite masu\n");
+    scanf("%f",&p1);
+    printf("Unesite povrsinu\n");
+    scanf("%f",&p2);
+    telo b(p1,p2);
+    printf("Pritisak tela na podlogu je %.2f N/m^2\n", b.pritisak());
+    return 0;
+}

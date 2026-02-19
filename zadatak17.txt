@@ -1,0 +1,50 @@
+#include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+class bazen
+{
+private:
+    int duz, sir, dub;
+public:
+    int povrsina()
+    {
+        return duz*sir+2*duz*dub+2*dub*sir;
+    }
+    float zapremina()
+    {
+        return duz*sir*dub;
+    }
+    void dodeljivanje(int x, int y, int z)
+    {
+        duz=x;
+        sir=y;
+        dub=z;
+    }
+};
+using namespace std;
+
+int main()
+{
+    bazen Mika, Zika;
+    int tmp1, tmp2, tmp3;
+    int ttp1, ttp2, ttp3;
+    printf("Unesi duzinu\n");
+    scanf("%d", &tmp1);
+    printf("Unesi sirinu\n");
+    scanf("%d", &tmp2);
+    printf("Unesi dubinu\n");
+    scanf("%d", &tmp3);
+    Mika.dodeljivanje(tmp1,tmp2,tmp3);
+    printf("Unesi duzinu\n");
+    scanf("%d", &ttp1);
+    printf("Unesi sirinu\n");
+    scanf("%d", &ttp2);
+    printf("Unesi dubinu\n");
+    scanf("%d", &ttp3);
+    Zika.dodeljivanje(ttp1,ttp2,ttp3);
+    if(Zika.zapremina()>Mika.zapremina())printf("\n Zikin bazen ima vecu zapreminu");
+    if(Zika.zapremina()<Mika.zapremina())printf("\n Mikin bazen ima vecu zapreminu");
+    if(Zika.zapremina()==Mika.zapremina())printf("\n Bazeni imaju jednake zapremine");
+    return 0;
+}

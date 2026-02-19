@@ -1,0 +1,39 @@
+#include <stdio.h>
+
+#define PI 3.14159
+
+void zapremina(float obim, float duzina, float &ukupnaZapremina, float granica)
+{
+    float r = obim / (2 * PI);
+    float zapremina = PI * r * r * duzina;
+    ukupnaZapremina += zapremina;
+    if (ukupnaZapremina > granica) throw 1;
+}
+
+int main()
+{
+    float obim, duzina, ukupnaZapremina = 0, granica;
+    int uslov = 0;
+    printf("Unesi maksimalnu dozvoljenu zapreminu: ");
+    scanf("%f", &granica);
+
+    do {
+        try {
+            printf("\nUnesi obim panja: ");
+            scanf("%f", &obim);
+            printf("Unesi duzinu panja: ");
+            scanf("%f", &duzina);
+            zapremina(obim, duzina, ukupnaZapremina, granica);
+            printf("Trenutna ukupna zapremina je: %.2f\n", ukupnaZapremina);
+        }
+        catch (int p) {
+            if (p == 1) {
+                printf("\nUkupna zapremina je presla zadatu vrednost %.2f\n", granica);
+                printf("Konacna zapremina je: %.2f\n", ukupnaZapremina);
+                uslov = 1;
+            }
+        }
+
+    } while (!uslov);
+    return 0;
+}

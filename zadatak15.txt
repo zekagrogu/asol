@@ -1,0 +1,16 @@
+#include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
+using namespace std;
+
+int sabiranje(int x, int y){
+return x+y;
+}
+
+int main(void)
+{
+    int a=3, b=5;
+    int x=sabiranje(a,b);
+    printf("\n%d", x);
+    return 0;
+}

@@ -1,0 +1,46 @@
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+using namespace std;
+struct tacka{
+int x,y;
+};
+int main()
+{
+    FILE *pok;
+    tacka a;
+    srand(time(0));
+    int i,x,k,poz;
+    float z, mini=10000000;
+    printf("Unesite broj k:");
+    scanf("%d",&k);
+    pok=fopen("tacke.bin","wb");
+    for(i=0;i<10+k;i++)
+    {
+        a.x=rand()%100;
+        a.y=rand()%100;
+        fwrite(&a,sizeof(a),1,pok);
+    }
+    fclose(pok);
+    i=1;
+    pok=fopen("tacke.bin", "rb");
+    while(feof(pok)==0)
+    {
+        fread(&a,sizeof(a),1,pok);
+        if(feof(pok)==0) {
+                printf("%d. tacka je x=%d i y=%d \n",i,a.x,a.y);
+        z=sqrt(a.x*a.x+a.y*a.y);
+        if(z<mini)
+        {
+            mini=z;
+            poz=i;
+        }
+        }
+        i++;
+    }
+    printf("Najbliza tacka je na poziciji %d i vrednost je %f",poz,mini);
+    fclose(pok);
+    return 0;
+}

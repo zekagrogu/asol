@@ -1,0 +1,41 @@
+#include <iostream>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+using namespace std;
+
+class voz
+{
+public:
+    int vagoni, sedista;
+    voz(){};
+    voz(int a, int b)
+    {
+        this->vagoni=a;
+        this->sedista=b;
+    }
+    voz operator%(voz p)
+    {
+        voz temp;
+        int z1=vagoni*sedista;
+        int z2=p.vagoni*p.sedista;
+        int z3=z1+z2;
+        int z4=z3/(vagoni+p.vagoni);
+        temp.vagoni=vagoni+p.vagoni;
+        temp.sedista=z4;
+        return temp;
+    }
+};
+
+int main()
+{
+    voz c;
+    voz a(3,4);
+    voz b(5,6);
+    c=a%b;
+    printf("Voz a ima %d vagona i %d sedista\n", a.vagoni, a.sedista);
+    printf("Voz b ima %d vagona i %d sedista\n", b.vagoni, b.sedista);
+    printf("Voz c ima %d vagona i %d sedista\n", c.vagoni, c.sedista);
+    return 0;
+}

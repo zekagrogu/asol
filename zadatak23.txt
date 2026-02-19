@@ -1,0 +1,29 @@
+int main()
+{
+FILE *pok;
+int x;
+pok= fopen("podaci.txt","w");
+srand(time(0));
+for(int i=0; i<10; i++)
+{
+x=rand()%90+10;
+fprintf(pok,"%d\n",x);
+}
+fclose(pok);
+pok= fopen("podaci.txt","a");
+x=5555;
+fprintf(pok,"%d\n");
+fclose(pok);
+pok= fopen("podaci.txt","a");
+fseek(pok,12,seek.set);
+x=8888;
+fprintf(pok,"%d\n",x);
+fclose(pok);
+pok= fopen("podaci.txt","r");
+do{
+fscanf(pok,"%d",&r);
+if(feof(pok)==0)printf("%d\n",r);}
+while(feof(pok)==0);
+fclose(pok);
+return 0;
+}

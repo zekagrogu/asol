@@ -1,0 +1,41 @@
+#include <iostream>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+using namespace std;
+
+class smanji
+{
+public:
+    int oduzimanje(int x, int b)
+    {
+        return x-b;
+    }
+    int oduzimanje(int x, int b, int c)
+    {
+        return (x-(b-c));
+    }
+    int oduzimanje(double x, double b)
+    {
+        return x-b;
+    }
+    int oduzimanje(int x, int b, int c, int d)
+    {
+        int rezultat;
+        if(d==3) rezultat=x+b+c;
+        if(d==5) rezultat=x*b*c;
+        if(d!=3 && d!=5) rezultat=x*x*x;
+        return rezultat;
+    }
+};
+
+int main()
+{
+    smanji a;
+    printf("rezultat je %d\n", a.oduzimanje(10,5));
+    printf("rezultat je %d\n", a.oduzimanje(10,5,3));
+    printf("rezultat je %.2f\n", a.oduzimanje(10.5,5.5));
+    printf("rezultat je %d\n", a.oduzimanje(10,5,3,1));
+    return 0;
+}

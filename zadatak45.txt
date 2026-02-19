@@ -1,0 +1,34 @@
+#include <iostream>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+using namespace std;
+
+int sabiranje(int a, int b)
+{
+    int temp;
+    if(a%2) throw 1;
+    temp=a+b;
+    return temp;
+}
+
+int main()
+{
+    int a, z=0, uslov=0;
+    printf("Unesi cele brojeve\n");
+    do
+    {
+        try
+        {
+            scanf("%d", &a);
+            z=sabiranje(a,z);
+            printf("Trenutan zbir je : %d\n", z);
+        }
+        catch(int p)
+        {
+            if(p==1) printf("Uneli ste neparan broj!!!\n Zbir je : %d", z);
+            uslov=1;
+        }
+    }while(uslov==0);
+    return 0;
+}

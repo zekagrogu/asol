@@ -1,0 +1,40 @@
+#include <iostream>
+#include <time.h>
+
+using namespace std;
+
+class radnik{
+private:
+    int brojsati, cenaposatu;
+public:
+    void set(int brs, int cps)
+    {
+    this-> brojsati=brs;
+    this-> cenaposatu=cps;
+    }
+    int get()
+    {
+        return this->cenaposatu* this->brojsati;
+    }
+};
+int main()
+{
+    radnik niz[100];
+    int i,x,y,maxi=0,poz=0;
+    srand(time(0));
+    for(i=0;i<100;i++)
+    {
+    x=rand()%700+500;
+    y=rand()%100+100;
+    niz[i].set(x,y);
+    if(niz[i].get()>maxi)
+    {
+        maxi=niz[i].get();
+        poz=i;
+    }
+    cout << niz[i].get()<< endl;
+    }
+    cout << "Najveca plata je: " <<maxi<< endl;
+    getchar();
+    return 0;
+}

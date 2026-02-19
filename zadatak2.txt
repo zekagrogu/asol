@@ -1,0 +1,17 @@
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+
+using namespace std;
+
+int main()
+{
+    int n, k, i;
+    printf("\n Unesi broj n");
+    scanf("%d", &n);
+    printf("\nUnesi broj k");
+    scanf("%d", &k);
+    for(i=1;i<=n;i++)
+        printf("\n%d", i*k);
+    return 0;
+}

@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+void saberi(int broj, int &zbir, int x)
+{
+    zbir += broj;
+    if (zbir > x) throw 1;
+}
+int main()
+{
+    int broj, zbir = 0, x, uslov = 0;
+    printf("Unesi granicnu vrednost x: ");
+    scanf("%d", &x);
+    do {
+        try {
+            printf("Unesi ceo broj: ");
+            scanf("%d", &broj);
+            saberi(broj, zbir, x);
+            printf("Trenutni zbir je: %d\n", zbir);
+        }
+        catch (int greska) {
+            if (greska == 1) {
+                printf("\nZbir je presao vrednost %d.\n", x);
+                printf("Konacan zbir je: %d\n", zbir);
+                uslov = 1;
+            }
+        }
+    } while (!uslov);
+    return 0;
+}

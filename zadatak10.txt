@@ -1,0 +1,27 @@
+#include <iostream>
+#include<stdio.h>
+#include<stdlib.h>
+
+struct telefon{
+    int gbram,sirina, visina,dijagonala;
+    float mpxkamera, tezina;
+};
+
+
+int main()
+{
+    telefon z;
+    printf("Unesi koliko rama ima telefon");
+    scanf("%d", &z.gbram);
+    printf("\nOvaj telefon ima %d gb rama\n", z.gbram);
+    //dopuna
+    telefon samsung, iphone;
+    printf("\nUnesi koliko rama ima samsung");
+    scanf("%d", &samsung.gbram);
+    printf("\nUnesi koliko rama ima iphone");
+    scanf("%d", &iphone.gbram);
+    if(samsung.gbram>iphone.gbram) printf("\nSamsung ima vise gb rama");
+    if(samsung.gbram<iphone.gbram) printf("\nIphone ima vise gb rama");
+    if(samsung.gbram==iphone.gbram) printf("\nImaju iste memorije");
+    return 0;
+}

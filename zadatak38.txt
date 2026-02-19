@@ -1,0 +1,39 @@
+#include <iostream>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+using namespace std;
+
+class vektor
+{
+public:
+    int x,y,z;
+    vektor(){};
+    vektor(int a, int b, int c)
+    {
+        this->x=a;
+        this->y=b;
+        this->z=c;
+    }
+    vektor operator^(vektor p)
+    {
+        vektor temp;
+        temp.x=x+p.x;
+        temp.y=y+p.y;
+        temp.z=z+p.z;
+        return temp;
+    }
+};
+
+int main()
+{
+    vektor c;
+    vektor a(3,4,1);
+    vektor b(5,6,2);
+    c=a^b;
+    printf("Vektor a ima koordinate %d %d %d\n", a.x, a.y, a.z);
+    printf("Vektor b ima koordinate %d %d %d\n", b.x, b.y, b.z);
+    printf("Vektor c ima koordinate %d %d %d\n", c.x, c.y, c.z);
+    return 0;
+}

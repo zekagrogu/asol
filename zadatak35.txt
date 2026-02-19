@@ -1,0 +1,36 @@
+#include <iostream>
+
+using namespace std;
+
+class radnik{
+private:
+    int brojsati, cenaposatu;
+public:
+    void set(int brs, int cps)
+    {
+    this-> brojsati=brs;
+    this-> cenaposatu=cps;
+    }
+    int get()
+    {
+        return this->cenaposatu* this->brojsati;
+    }
+};
+int main()
+{
+    radnik Mika, Zika;
+    int x,y;
+    cout << "Unesi cenu za Miku" << endl;
+    cin>>x;
+    cout << "Unesi sate za Miku" << endl;
+    cin>>y;
+    Mika.set(x,y);
+    cout << "Unesi cenu za Ziku" << endl;
+    cin>>x;
+    cout << "Unesi sate za Ziku" << endl;
+    cin>>y;
+    Zika.set(x,y);
+    if(Zika.get()>Mika.get()) cout << "Zika ima vecu platu" << endl;
+    else cout << "Mika ima vecu platu" << endl;
+    return 0;
+}

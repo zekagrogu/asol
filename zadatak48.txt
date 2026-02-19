@@ -1,0 +1,28 @@
+#include <iostream>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+using namespace std;
+
+int main()
+{
+    int a, p, n;
+    float k=0;
+    int niz[30];
+    printf("Koliko cifara ima");
+    scanf("%d", &n);
+    for(int i=0;i<n;i++)
+    {
+        printf("Unesi %d. cifru:\n",i+1);
+        scanf("%d", &a);
+        niz[i]=a;
+    }
+    for(int i=0;i<n;i++)
+    {
+        p=niz[i];
+        k=k+p*pow(10,n-1-i);
+    }
+    printf("Uneli ste broj %10.0f", k);
+    return 0;
+}

@@ -1,0 +1,50 @@
+#include <iostream>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+using namespace std;
+
+class brojevi
+{
+protected:
+    int a,b;
+public:
+    void ucitavanje()
+    {
+        printf("Unesi 1. broj: ");
+        scanf("%d", &a);
+        printf("Unesi 2. broj: ");
+        scanf("%d", &b);
+    }
+};
+
+class sabiranje:public brojevi
+{
+public:
+    void saberi()
+    {
+        int suma=a+b;
+        printf("Zbir je %d\n", suma);
+    }
+};
+
+class oduzimanje:public brojevi
+{
+public:
+    void oduzmi()
+    {
+        int rez=a-b;
+        printf("Rezultat je %d\n", rez);
+    }
+};
+int main()
+{
+    sabiranje x;
+    oduzimanje y;
+    x.ucitavanje();
+    x.saberi();
+    y.ucitavanje();
+    y.oduzmi();
+    return 0;
+}

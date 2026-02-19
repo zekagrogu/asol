@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <string.h>
+
+// Bazna klasa
+class Vozilo {
+protected:
+    char marka[30];
+    int godinaProizvodnje;
+
+public:
+    void ucitaj() {
+        printf("Unesi marku vozila: ");
+        scanf("%s", marka);
+
+        printf("Unesi godinu proizvodnje: ");
+        scanf("%d", &godinaProizvodnje);
+    }
+
+    void ispisi() {
+        printf("Marka: %s\n", marka);
+        printf("Godina proizvodnje: %d\n", godinaProizvodnje);
+    }
+};
+
+// Izvedena klasa
+class Automobil : public Vozilo {
+private:
+    int brojVrata;
+    float cena;
+
+public:
+    void ucitaj() {
+        Vozilo::ucitaj();
+
+        printf("Unesi broj vrata: ");
+        scanf("%d", &brojVrata);
+
+        printf("Unesi cenu automobila (EUR): ");
+        scanf("%f", &cena);
+    }
+
+    void ispisi() {
+        Vozilo::ispisi();
+        printf("Broj vrata: %d\n", brojVrata);
+        printf("Cena: %.2f EUR\n", cena);
+    }
+
+    float getCena() {
+        return cena;
+    }
+};
+
+int main() {
+    Automobil a;
+
+    a.ucitaj();
+    printf("\n");
+    a.ispisi();
+
+    if (a.getCena() > 200000) {
+        printf("\nAutomobil je luksuzan.\n");
+    }
+
+    return 0;
+}

@@ -1,0 +1,55 @@
+#include <iostream>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+using namespace std;
+
+class radnik
+{
+protected:
+    char ime[30];
+    float plata;
+public:
+    void ucitavanje()
+    {
+        printf("Unesi ime i prezime radnika\n");
+        scanf("%49[^\n]",ime);
+        printf("Unesi platu radnika\n");
+        scanf("%f",&plata);
+    }
+    void ispis()
+    {
+        printf("Radnik : %s\n",ime);
+        printf("Osnovna plata je:%10.2f\n",plata);
+    }
+};
+
+class menadzer:public radnik
+{
+private:
+    float bonus;
+public:
+    void unesi()
+    {
+        printf("Unesi bonus menadzera\n");
+        scanf("%f",&bonus);
+    }
+    float racunaj()
+    {
+        return plata+bonus;
+    }
+    void ispisukupno()
+    {
+        printf("Ukupna plata je:%10.2f\n",racunaj());
+    }
+};
+
+int main()
+{
+    menadzer x;
+    x.ucitavanje();
+    x.unesi();
+    x.ispis();
+    x.ispisukupno();
+    return 0;
+}

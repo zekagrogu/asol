@@ -1,0 +1,37 @@
+#include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+class cetvorougao
+{
+private:
+    int duz, sir;
+public:
+    int povrsina()
+    {
+        return duz*sir;
+    }
+    float dijagonala()
+    {
+        return sqrt(duz*duz+sir*sir);
+    }
+    void dodeljivanje(int x, int y)
+    {
+        duz=x;
+        sir=y;
+    }
+};
+using namespace std;
+
+int main()
+{
+    cetvorougao z;
+    int tmp1, tmp2;
+    printf("Unesi duzinu\n");
+    scanf("%d", &tmp1);
+    printf("Unesi sirinu\n");
+    scanf("%d", &tmp2);
+    z.dodeljivanje(tmp1,tmp2);
+    printf("Povrsina je %d a dijagonala %.2f", z.povrsina(), z.dijagonala());
+    return 0;
+}

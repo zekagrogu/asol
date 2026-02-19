@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main()
+{
+    FILE *pok;
+    int x, r;
+    int min, max;
+    
+    // Upis 10 nasumičnih brojeva
+    pok = fopen("podaci.txt", "w");
+    srand(time(0));
+    
+    for(int i = 0; i < 10; i++)
+    {
+        x = rand() % 90 + 10;
+        fprintf(pok, "%d\n", x);
+    }
+    fclose(pok);
+
+    pok = fopen("podaci.txt", "a");
+    x = 5555;
+    fprintf(pok, "%d\n", x);
+    fclose(pok);
+
+    // Dopuna
+    pok = fopen("podaci.txt", "r");
+
+    if(fscanf(pok, "%d", &r) == 1)
+    {
+        min = max = r;   // prvi broj postavljamo kao početni min i max
+
+        while(fscanf(pok, "%d", &r) == 1)
+        {
+            if(r < min)
+                min = r;
+            if(r > max)
+                max = r;
+        }
+    }
+
+    fclose(pok);
+
+    printf("Najmanji broj u fajlu je: %d\n", min);
+    printf("Najveci broj u fajlu je: %d\n", max);
+
+    return 0;
+}

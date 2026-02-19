@@ -1,0 +1,26 @@
+#include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+using namespace std;
+
+int main()
+{
+    int maxi=0, i, x, niz[10], riz[10], k;
+    srand(time(0));
+    k=rand()%100;
+    for(i=0;i<10;i++)
+    {
+        niz[i]=rand()%100;
+        riz[i]=niz[i]*k;
+        printf("\n%d", niz[i]);
+        if(maxi<niz[i])//dopuna 1
+            maxi=niz[i];
+    }
+    for(i=0;i<10;i++)//dopuna 2
+    {
+        printf("\n\n%d", riz[i]);
+    }
+    printf("\n%d", maxi);
+    return 0;
+}

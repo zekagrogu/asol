@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+class balvan
+{
+private:
+    float obim, visina;
+public:
+    balvan(float a, float b)
+    {
+        obim=a;
+        visina=b;
+    }
+    float zapremina()
+    {
+        return (obim/6.28)*(obim/6.28)*3.14*visina;
+    }
+};
+
+int main()
+{
+    srand(time(0))
+    float ol,vl,maxi=0;
+    float niz[100];
+    for(int i=0; i<100; i++)
+    {
+    ol=rand()%100+1;
+    vl=rand()%100+1;
+    }
+    printf("\n Zapremina balvana %d=%10.2f\n",i+1,niz[i]);
+    if(maxi<niz[i])
+    {
+    maxi=niz[i]
+    }
+    printf("\n  Maximum zapremina balvana je %10.2f\n",maxi);
+    return 0;
+}

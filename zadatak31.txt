@@ -1,0 +1,43 @@
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+using namespace std;
+
+class automobil{
+public:
+    static float cenagoriva;
+    float potrosnja,put;
+    float trosak(){
+    return potrosnja*put/100;
+    }
+    };
+    float automobil::cenagoriva=187;
+int main()
+{
+    automobil pezo,punto,skoda;
+    printf("\n Unesi koliko trosi pezo");
+    scanf("%f", &pezo.potrosnja);
+    printf("\n Unesi koliko trosi punto");
+    scanf("%f", &punto.potrosnja);
+    printf("\n Unesi koliko trosi skoda");
+    scanf("%f", &skoda.potrosnja);
+
+    printf("\n Unesi predjeni put za pezo");
+    scanf("%f", &pezo.put);
+    printf("\n Unesi predjeni put za punto");
+    scanf("%f", &punto.put);
+    printf("\n Unesi predjeni put za skodu");
+    scanf("%f", &skoda.put);
+
+    float p1,p2,p3;
+    p1=pezo.trosak()*pezo.cenagoriva;
+    p2=punto.trosak()*punto.cenagoriva;
+    p3=skoda.trosak()*skoda.cenagoriva;
+
+    printf("\n Potrosnja automobila je %10.2f %10.2f %10.2f",p1,p2,p3);
+    if((p1<p2)&&(p1<p3)) printf("\n Najmanje je potrosio Pezo");
+    if((p2<p1)&&(p2<p3)) printf("\n Najmanje je potrosio Punto");
+    if((p3<p1)&&(p3<p2)) printf("\n Najmanje je potrosila Skoda");
+    return 0;
+}

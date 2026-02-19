@@ -1,0 +1,27 @@
+#include <iostream>
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
+struct radnik{
+    int Mika, Zika;
+};
+
+using namespace std;
+
+int main()
+{
+    radnik brh, ch;
+    printf("Unesi koliko sati je radio Mika");
+    scanf("%d", &brh.Mika);
+    printf("\nUnesi koliko je placen Mika");
+    scanf("%d", &ch.Mika);
+    printf("\nUnesi koliko sati je radio Zika");
+    scanf("%d", &brh.Zika);
+    printf("\nUnesi koliko je placen Zika");
+    scanf("%d", &ch.Zika);
+    if(brh.Mika*ch.Mika==brh.Zika*ch.Zika)printf("\nImaju jednake plate");
+    if(brh.Mika*ch.Mika>brh.Zika*ch.Zika)printf("\nMika ima vecu platu");
+    if(brh.Mika*ch.Mika<brh.Zika*ch.Zika)printf("\nZika ima vecu paltu");
+    return 0;
+}

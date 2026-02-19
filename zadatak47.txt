@@ -1,0 +1,40 @@
+#include <iostream>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+using namespace std;
+
+int sabiranje(int a, int b, int c, int z)
+{
+    int temp;
+    if(a>c && b>c) temp=z+c;
+    if(a>b && b<c) temp=z+b;
+    if(a<b && a<c) temp=z+a;
+    if(a==b && b==c) throw 1;
+    return temp;
+}
+
+int main()
+{
+    int a, b, c, z=0, uslov=0;
+    do
+    {
+        printf("Unesi broj:\n");
+        scanf("%d", &a);
+        printf("Unesi broj:\n");
+        scanf("%d", &b);
+        printf("Unesi broj:\n");
+        scanf("%d", &c);
+        try
+        {
+            z=sabiranje(a,b,c,z);
+            printf("Trenutan zbir je %d\n", z);
+        }
+        catch(int p)
+        {
+            if(p==1) printf("Uneli ste tri ista broja!!!\n Zbir je : %d",z);
+            uslov=1;
+        }
+    }while(uslov==0);
+    return 0;
+}

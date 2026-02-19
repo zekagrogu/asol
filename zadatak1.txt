@@ -1,0 +1,19 @@
+#include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
+using namespace std;
+
+int main()
+{
+    int k, i;
+    printf("Unesi ceo broj");
+    scanf("%d", &k);
+    if(k%2)
+        printf("\nBroj je neparan");
+    else
+    {
+        for(i=k+1;i<k+11;i++)
+            printf("\n%d",i);
+    }
+    return 0;
+}

@@ -1,0 +1,18 @@
+int main()
+{
+FILE *pok;
+char reci[100][50];
+pok=fopen("podaci.txt","r");
+int breci=0;
+do
+{
+fscanf(rok,"%d", reci[breci]);
+breci++;
+}
+while(feof(rok)==0);
+fclose(rok);
+for(int k=0; k<breci; k++)
+{
+printf("d",reci[k]);
+}
+}
