@@ -1,0 +1,179 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace tab
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+            tabControl1.SelectedTab = tabPage1;
+            tabControl1.Appearance = TabAppearance.FlatButtons;
+            tabControl1.ItemSize = new Size(0, 1);
+            tabControl1.SizeMode = TabSizeMode.Fixed;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab(1);
+            progressBar1.Value = 10;
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab(2);
+            int poeni = Convert.ToInt32(label3.Text);
+            if (radioButton1.Checked == true) poeni += 10;
+            if (radioButton2.Checked == true) poeni -= 10;
+            if (radioButton3.Checked == true) poeni -= 10;
+            label3.Text = Convert.ToString(poeni);
+            progressBar1.Value = 20;
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab(3);
+            int poeni = Convert.ToInt32(label3.Text);
+            if (radioButton6.Checked == true) poeni += 10;
+            if (radioButton5.Checked == true) poeni -= 10;
+            if (radioButton4.Checked == true) poeni -= 10;
+            label3.Text = Convert.ToString(poeni);
+            progressBar1.Value = 30;
+        }
+
+        private void label23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab(4);
+            int poeni = Convert.ToInt32(label3.Text);
+            if (radioButton9.Checked == true) poeni -= 10;
+            if (radioButton8.Checked == true) poeni += 10;
+            if (radioButton7.Checked == true) poeni -= 10;
+            label3.Text = Convert.ToString(poeni);
+            progressBar1.Value = 40;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab(5);
+            int poeni = Convert.ToInt32(label3.Text);
+            if (radioButton12.Checked == true) poeni -= 10;
+            if (radioButton11.Checked == true) poeni -= 10;
+            if (radioButton10.Checked == true) poeni += 10;
+            label3.Text = Convert.ToString(poeni);
+            progressBar1.Value = 50;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab(6);
+            int poeni = Convert.ToInt32(label3.Text);
+            if (radioButton14.Checked == true) poeni -= 10;
+            if (radioButton13.Checked == true) poeni -= 10;
+            if (radioButton15.Checked == true) poeni += 10;
+            label3.Text = Convert.ToString(poeni);
+            progressBar1.Value = 60;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab(7);
+            int poeni = Convert.ToInt32(label3.Text);
+            if (radioButton18.Checked == true) poeni += 10;
+            if (radioButton17.Checked == true) poeni -= 10;
+            if (radioButton16.Checked == true) poeni -= 10;
+            label3.Text = Convert.ToString(poeni);
+            progressBar1.Value = 70;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab(8);
+            int poeni = Convert.ToInt32(label3.Text);
+            if (radioButton21.Checked == true) poeni -= 10;
+            if (radioButton20.Checked == true) poeni -= 10;
+            if (radioButton19.Checked == true) poeni += 10;
+            label3.Text = Convert.ToString(poeni);
+            progressBar1.Value = 80;
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab(9);
+            int poeni = Convert.ToInt32(label3.Text);
+            if (radioButton24.Checked == true) poeni += 10;
+            if (radioButton23.Checked == true) poeni -= 10;
+            if (radioButton22.Checked == true) poeni -= 10;
+            label3.Text = Convert.ToString(poeni);
+            progressBar1.Value = 90;
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab(10);
+            int poeni = Convert.ToInt32(label3.Text);
+            if (radioButton27.Checked == true) poeni += 10;
+            if (radioButton26.Checked == true) poeni -= 10;
+            if (radioButton25.Checked == true) poeni -= 10;
+            label3.Text = Convert.ToString(poeni);
+            progressBar1.Value = 100;
+            if (poeni > 85) label15.Text = "5";
+            if (85 >poeni && poeni > 65) label15.Text = "4";
+            if (65 > poeni && poeni > 45) label15.Text = "3";
+            if (45 > poeni && poeni > 25) label15.Text = "2";
+            if (25 > poeni && poeni > 0) label15.Text = "1";
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab(0);
+        }
+    }
+}

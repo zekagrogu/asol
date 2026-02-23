@@ -1,0 +1,173 @@
+namespace zadatak2
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            timer2.Start();
+            timer1.Start();
+            button1.Enabled = true;
+            button1.Focus();
+            label1.Text = "0";
+            button1.Left = 31;
+            button3.Left = 179;
+            button4.Left = 179;
+            button5.Left = 353;
+            button6.Left = 353;
+            button7.Left = 532;
+            button8.Left = 532;
+            button9.Left = 734;
+            button10.Left = 734;
+            button11.Left = 734;
+        }
+
+        private void button1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 'w') button1.Top = button1.Top - 20;
+        }
+        int brzina = 8;
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Random x = new Random();
+            int Visina = x.Next(40, 120) + 20;
+            button1.Top += 2;
+            button3.Left -= brzina;
+            button4.Left -= brzina;
+            button5.Left -= brzina;
+            button6.Left -= brzina;
+            button7.Left -= brzina;
+            button8.Left -= brzina;
+            button9.Left -= brzina;
+            button10.Left -= brzina;
+
+            if (button1.Top > 280)
+            {
+                timer1.Stop();
+                button1.Enabled = false;
+                MessageBox.Show("GAME OVER");
+            }
+
+            if (button4.Left < -23)
+            {
+                button3.Height = Visina;
+                button4.Height = 800;
+                button4.Top = Visina + 100;
+                button3.Left = 750;
+                button4.Left = 750;
+                label2.Text = "0";
+            }
+
+            if (button6.Left < -23)
+            {
+                button5.Height = Visina;
+                button6.Height = 800;
+                button6.Top = Visina + 100;
+                button5.Left = 750;
+                button6.Left = 750;
+                label2.Text = "0";
+            }
+
+            if (button8.Left < -23)
+            {
+                button7.Height = Visina;
+                button8.Height = 800;
+                button8.Top = Visina + 100;
+                button7.Left = 750;
+                button8.Left = 750;
+                label2.Text = "0";
+            }
+
+            if (button10.Left < -23)
+            {
+                button9.Height = Visina;
+                button10.Height = 800;
+                button10.Top = Visina + 100;
+                button9.Left = 750;
+                button10.Left = 750;
+                label2.Text = "0";
+            }
+
+            int poeni = Convert.ToInt32(label1.Text);
+            int prosao = Convert.ToInt32(label2.Text);
+
+
+            if (button1.Left > button3.Left && button1.Left < button3.Left + 5 && prosao != 1)
+            {
+                poeni = poeni + 1;
+                label1.Text = poeni.ToString();
+                label2.Text = "1";
+            }
+
+
+            if (button1.Left > button5.Left && button1.Left < button5.Left + 5 && prosao != 2)
+            {
+                poeni = poeni + 1;
+                label1.Text = poeni.ToString();
+                label2.Text = "2";
+            }
+
+
+            if (button1.Left > button7.Left && button1.Left < button7.Left + 5 && prosao != 3)
+            {
+                poeni = poeni + 1;
+                label1.Text = poeni.ToString();
+                label2.Text = "3";
+            }
+
+
+            if (button1.Left > button9.Left && button1.Left < button9.Left + 5 && prosao != 4)
+            {
+                poeni = poeni + 1;
+                label1.Text = poeni.ToString();
+                label2.Text = "4";
+            }
+
+            if (button1.Bounds.IntersectsWith(button3.Bounds) || button1.Bounds.IntersectsWith(button4.Bounds) || button1.Bounds.IntersectsWith(button5.Bounds) || button1.Bounds.IntersectsWith(button6.Bounds) || button1.Bounds.IntersectsWith(button7.Bounds) || button1.Bounds.IntersectsWith(button8.Bounds) || button1.Bounds.IntersectsWith(button9.Bounds) || button1.Bounds.IntersectsWith(button10.Bounds))
+            {
+                timer1.Stop();
+                button1.Enabled = false;
+                MessageBox.Show("GAME OVER");
+
+            }
+
+            if (button11.Visible)
+            {
+                button11.Left -= brzina;
+                if (button11.Left < -30)
+                {
+                    button11.Visible = false;
+                }
+            }
+
+            if (button11.Visible && button1.Bounds.IntersectsWith(button11.Bounds))
+            {
+                brzina = 16;
+                button11.Visible = false;
+                timer3.Start();
+            }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (!button11.Visible)
+            {
+                Random x = new Random();
+                button11.Left = 700;
+                button11.Top = x.Next(130, 220);
+                button11.Visible = true;
+            }
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            brzina = 8;
+            timer3.Stop();
+        }
+    }
+}

@@ -1,0 +1,165 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace flappy_bird
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            timer1.Start();
+            timer2.Start();
+            button11.Focus();
+            button11.Top = 106;
+            button11.Left = 12;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            button15.Left -= 5;
+            button14.Left -= 5;
+            if(button15.Left<-13)
+            {
+                Random x = new Random();
+                int visina = x.Next(0, 200) + 20;
+                button15.Height = visina;
+                button14.Height = 800;
+                button14.Top = visina + 70; ;
+                button15.Left = 700;
+                button14.Left = 700;
+            }
+
+            button10.Left -= 5;
+            button9.Left -= 5;
+            if (button10.Left < -13)
+            {
+                Random x = new Random();
+                int visina = x.Next(0, 200) + 30;
+                button10.Height = visina;
+                button9.Height = 800;
+                button9.Top = visina + 70; ;
+                button10.Left = 700;
+                button9.Left = 700;
+            }
+
+            button8.Left -= 5;
+            button7.Left -= 5;
+            if (button8.Left < -13)
+            {
+                Random x = new Random();
+                int visina = x.Next(0, 200) + 20;
+                button8.Height = visina;
+                button7.Height = 800;
+                button7.Top = visina + 70; ;
+                button8.Left = 700;
+                button7.Left = 700;
+            }
+
+            button13.Left -= 5;
+            button12.Left -= 5;
+            if (button13.Left < -13)
+            {
+                Random x = new Random();
+                int visina = x.Next(0, 200) + 20;
+                button13.Height = visina;
+                button12.Height = 800;
+                button12.Top = visina + 70; ;
+                button13.Left = 700;
+                button12.Left = 700;
+            }
+
+            if (button11.Bounds.IntersectsWith(button14.Bounds))
+            {
+                timer1.Stop();
+                timer2.Stop();
+                MessageBox.Show("GAME OVER");
+            }
+
+            if (button11.Bounds.IntersectsWith(button15.Bounds))
+            {
+                timer1.Stop();
+                timer2.Stop();
+                MessageBox.Show("GAME OVER");
+            }
+
+            if (button11.Bounds.IntersectsWith(button10.Bounds))
+            {
+                timer1.Stop();
+                timer2.Stop();
+                MessageBox.Show("GAME OVER");
+            }
+
+            if (button11.Bounds.IntersectsWith(button9.Bounds))
+            {
+                timer1.Stop();
+                timer2.Stop();
+                MessageBox.Show("GAME OVER");
+            }
+
+            if (button11.Bounds.IntersectsWith(button9.Bounds))
+            {
+                timer1.Stop();
+                timer2.Stop();
+                MessageBox.Show("GAME OVER");
+            }
+
+            if (button11.Bounds.IntersectsWith(button7.Bounds))
+            {
+                timer1.Stop();
+                timer2.Stop();
+                MessageBox.Show("GAME OVER");
+            }
+
+            if (button11.Bounds.IntersectsWith(button13.Bounds))
+            {
+                timer1.Stop();
+                timer2.Stop();
+                MessageBox.Show("GAME OVER");
+            }
+
+            if (button11.Bounds.IntersectsWith(button12.Bounds))
+            {
+                timer1.Stop();
+                timer2.Stop();
+                MessageBox.Show("GAME OVER");
+            }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            button11.Top += 5;
+        }
+
+        private void button11_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 'w')button11.Top = button11.Top - 20;
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}

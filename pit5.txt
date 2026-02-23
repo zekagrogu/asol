@@ -1,0 +1,161 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace lavirint
+{
+    public partial class Form1 : Form
+    {
+        List<Button> cvet = new List<Button>();
+        int[,] niz = {
+        { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
+{0,  1,  0,  0,  0,  0,  0,  1,  1,  0,  1,  0},
+{0,  1,  0,  0,  1,  1,  0,  0,  0,  1,  0,  0},
+{0,  1,  1,  0,  0,  0,  0,  0,  0,  0,  1,  0},
+{0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0},
+{0,  1,  0,  0,  1,  0,  1,  0,  0,  0,  1,  0},
+{0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  0},
+{0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0},
+{0,  1,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0},
+{0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0},
+{0,  0,  1,  1,  0,  1,  1,  1,  1,  1,  0,  0},
+{0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0}};
+
+        List<Button> novo = new List<Button>();
+        int[,] niz2 = {
+        { 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0},
+{0,  1,  0,  0,  0,  0,  0,  1,  1,  0,  1,  0},
+{0,  1,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0},
+{0,  1,  1,  0,  0,  0,  0,  0,  0,  0,  1,  0},
+{0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0},
+{0,  1,  0,  0,  0,  0,  1,  0,  1,  0,  1,  0},
+{0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  0},
+{0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0},
+{0,  1,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0},
+{0,  1,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0},
+{0,  0,  1,  1,  0,  1,  1,  1,  1,  1,  0,  0},
+{0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0}};
+
+        int x = 0, y = 0;
+        int oldx = 0, oldy = 0;
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 12; i++)
+                for (int j = 0; j < 12; j++)
+                {
+                    if (niz[i, j] == 0)
+                    {
+                        Button taster = new Button();
+                        panel2.Controls.Add(taster);
+                        taster.Location = new Point(j * 40 + 10, i * 40 + 10);
+                        Random broj = new Random();
+                        int z1 = broj.Next(0, 255);
+                        int z2 = broj.Next(0, 255);
+                        int z3 = broj.Next(0, 255);
+                        taster.BackColor = System.Drawing.Color.FromArgb(z1, z2, z3);
+                        taster.BackColor = Color.Yellow;
+                        taster.Size = new Size(20, 20);
+                        cvet.Insert(0, taster);
+                    }
+                }
+
+            for (int i = 0; i < 12; i++)
+                for (int j = 0; j < 12; j++)
+                {
+                    if (niz2[i, j] == 1)
+                    {
+                        Button taster = new Button();
+                        panel2.Controls.Add(taster);
+                        taster.Location = new Point(j * 40, i * 40);
+                        taster.BackColor = Color.Blue;
+                        taster.Size = new Size(40, 40);
+                    }
+                    
+                }
+        }
+
+        private void button2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            oldx = x; oldy = y;
+            if (e.KeyChar == 'a') { button2.Left -= 40; x--; }
+            if (e.KeyChar == 's') { button2.Top += 40; y++; }
+            if (e.KeyChar == 'd') { button2.Left += 40; x++; }
+            if (e.KeyChar == 'w') { button2.Top -= 40; y--; }
+
+            if (button2.Left < 0) button2.Left = 0;
+            if (button2.Left > 440) button2.Left = 440;
+            if (button2.Top < 0) button2.Top = 0;
+            if (button2.Top > 440) button2.Top = 440;
+
+            if (niz[y, x] == 1)
+            {
+                x = oldx;
+                y = oldy;
+                button2.Left = x * 40;
+                button2.Top = y * 40;
+            }
+            for(int i=0; i<cvet.Count;i++)
+            {
+                if (button2.Bounds.IntersectsWith(cvet[i].Bounds))
+                {
+                    cvet[i].Dispose();
+                    cvet.Remove(cvet[i]);
+                }
+            }
+            if (cvet.Count == 0) button3.PerformClick();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Random x = new Random();
+            int pravac = x.Next(0, 4);
+            if (pravac == 0) button4.Left -= 40;
+            if (pravac == 1) button4.Top += 40;
+            if (pravac == 2) button4.Left += 40;
+            if (pravac == 3) button4.Top -= 40;
+            if (button2.Left > button4.Left) button4.Left += 40;
+            if (button2.Left < button4.Left) button4.Left -= 40;
+            if (button2.Top > button4.Top) button4.Top += 40;
+            if (button2.Top < button4.Top) button4.Top -= 40;
+        }
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            button2.Focus();
+            for (int i = 0; i < 12; i++)
+                for (int j = 0; j < 12; j++)
+                {
+                    if (niz[i, j] == 1)
+                    {
+                        Button taster = new Button();
+                        panel2.Controls.Add(taster);
+                        taster.Location = new Point(j * 40, i * 40);
+                        taster.BackColor = Color.Blue;
+                        taster.Size = new Size(40, 40);
+                    }
+                    if (niz[i, j] == 0)
+                    {
+                        Button taster = new Button();
+                        panel2.Controls.Add(taster);
+                        taster.Location = new Point(j * 40 + 10, i * 40 + 10);
+                        taster.BackColor = Color.Yellow;
+                        taster.Size = new Size(20, 20);
+                        cvet.Insert(0, taster);
+                    }
+                }
+            timer1.Start();
+        }
+    }
+}

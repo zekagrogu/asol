@@ -1,0 +1,517 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace ugao
+{
+    public partial class Form1 : Form
+    {
+        int px = -1, py = -1;
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            timer1.Start();
+            button2.Enabled=true;
+            button3.Enabled = true;
+            button3.Focus();
+            label1.Text = "0";
+
+            button4.Visible = true;
+            button5.Visible = true;
+            button6.Visible = true;
+            button7.Visible = true;
+            button8.Visible = true;
+            button9.Visible = true;
+            button10.Visible = true;
+            button11.Visible = true;
+            button12.Visible = true;
+            button13.Visible = true;
+            button14.Visible = true;
+            button15.Visible = true;
+            button16.Visible = true;
+            button17.Visible = true;
+            button18.Visible = true;
+            button19.Visible = true;
+            button20.Visible = true;
+            button21.Visible = true;
+            button22.Visible = true;
+            button23.Visible = true;
+            button24.Visible = true;
+            button25.Visible = true;
+            button26.Visible = true;
+            button27.Visible = true;
+            button28.Visible = true;
+            button29.Visible = true;
+            button30.Visible = true;
+            button31.Visible = true;
+            button32.Visible = true;
+            button33.Visible = true;
+            button34.Visible = true;
+            button35.Visible = true;
+            button36.Visible = true;
+            button37.Visible = true;
+            button38.Visible = true;
+            button39.Visible = true;
+            button40.Visible = true;
+            button41.Visible = true;
+            button42.Visible = true;
+            button43.Visible = true;
+            
+        }
+
+        private void button3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 'a') button3.Left = button3.Left - 10;
+            if (e.KeyChar == 'd') button3.Left = button3.Left + 10;
+            
+            
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (button2.Top < 0) py = py * -1;
+            if (button2.Left < 0) px = px * -1;
+            if (button2.Left > 800) px = px * -1;
+
+            if ((px == 1) && (py == 1)) { button2.Left += 3; button2.Top -= 3; }
+            if ((px == 1) && (py == -1)) { button2.Left += 3; button2.Top += 3; }
+            
+            if ((px == -1) && (py == 1)) { button2.Left -= 3; button2.Top -= 3; }
+            if ((px == -1) && (py == -1)) { button2.Left -= 3; button2.Top += 3; }
+
+            if (button2.Bounds.IntersectsWith(button3.Bounds))
+            {
+                if ((button2.Top < button3.Top) || (button2.Top > button3.Top))
+                    py = py * -1;
+            }
+            if (button2.Bounds.IntersectsWith(button4.Bounds))
+            {
+                button4.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button5.Bounds))
+            {
+                button5.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button6.Bounds))
+            {
+                button6.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button7.Bounds))
+            {
+                button7.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+
+            if (button2.Bounds.IntersectsWith(button8.Bounds))
+            {
+                button8.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button9.Bounds))
+            {
+                button9.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button10.Bounds))
+            {
+                button10.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button11.Bounds))
+            {
+                button11.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button12.Bounds))
+            {
+                button12.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+
+            if (button2.Bounds.IntersectsWith(button13.Bounds))
+            {
+                button13.Left = -1000;
+                py = py * -1;
+            }
+            if (button2.Bounds.IntersectsWith(button14.Bounds))
+            {
+                button14.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button15.Bounds))
+            {
+                button15.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+
+            if (button2.Bounds.IntersectsWith(button16.Bounds))
+            {
+                button16.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button17.Bounds))
+            {
+                button17.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            
+
+
+            if (button2.Bounds.IntersectsWith(button18.Bounds))
+            {
+                button18.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button19.Bounds))
+            {
+                button19.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button20.Bounds))
+            {
+                button20.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button21.Bounds))
+            {
+                button21.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button22.Bounds))
+            {
+                button22.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button23.Bounds))
+            {
+                button23.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+
+            if (button2.Bounds.IntersectsWith(button24.Bounds))
+            {
+                button24.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button25.Bounds))
+            {
+                button25.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button26.Bounds))
+            {
+                button26.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button27.Bounds))
+            {
+                button27.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+
+            if (button2.Bounds.IntersectsWith(button28.Bounds))
+            {
+                button28.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button29.Bounds))
+            {
+                button29.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button30.Bounds))
+            {
+                button30.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button31.Bounds))
+            {
+                button31.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+
+            if (button2.Bounds.IntersectsWith(button32.Bounds))
+            {
+                button32.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button33.Bounds))
+            {
+                button33.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+
+            if (button2.Bounds.IntersectsWith(button34.Bounds))
+            {
+                button34.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button35.Bounds))
+            {
+                button35.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+
+            if (button2.Bounds.IntersectsWith(button36.Bounds))
+            {
+                button36.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button37.Bounds))
+            {
+                button37.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+
+            if (button2.Bounds.IntersectsWith(button38.Bounds))
+            {
+                button38.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button39.Bounds))
+            {
+                button39.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+
+            if (button2.Bounds.IntersectsWith(button40.Bounds))
+            {
+                button40.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button41.Bounds))
+            {
+                button41.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button42.Bounds))
+            {
+                button42.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Bounds.IntersectsWith(button43.Bounds))
+            {
+                button43.Left = -1000;
+                py = py * -1;
+                string s = label1.Text;
+                int poeni = Convert.ToInt32(s);
+                poeni++;
+                s = Convert.ToString(poeni);
+                label1.Text = s;
+            }
+            if (button2.Top > 400)
+            {
+                MessageBox.Show("game over");
+                timer1.Stop();
+            }
+        }
+    }
+}
