@@ -1,0 +1,37 @@
+class oblik{
+public:
+virtual void ucitavanje()=0;
+virtual float povrsina()=0;
+virtual ~oblik() {} //mora da ima konstruktor
+};
+
+class pravougaonik:public oblik{
+private:
+    float sirina,duzina;
+    public:
+    void ucitavanje() override
+    {
+        printf("Unesite sirinu:\n");
+        scanf("%f",&sirina);
+        printf("Unesite duzinu:\n");
+        scanf("%f",&duzina);
+    }
+    float povrsina()override
+    {
+        return duzina*sirina;
+    }
+};
+
+int main()
+{
+    //ovo * je pokazivac na interfejs
+    oblik* x=new pravougaonik();
+    //ovo new pravi dinamicki novi objekat
+    x->ucitavanje();
+    //ucitavanje preko pokazivaca
+    printf("Povrsina je: %10.2f\n",x->povrsina());
+
+    delete x;
+    //obavezno oslobadjanje memorije
+    return 0;
+}

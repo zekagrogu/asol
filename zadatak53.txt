@@ -1,0 +1,37 @@
+class figura
+{
+public:
+    virtual void ucitavanje() = 0;
+    virtual float povrsina() = 0;
+};
+
+class pravougaonik : public figura
+{
+private:
+    float a, b;
+
+public:
+    void ucitavanje()
+    {
+        printf("Unesi stranicu a:\n");
+        scanf("%f", &a);
+
+        printf("Unesi stranicu b:\n");
+        scanf("%f", &b);
+    }
+
+    float povrsina()
+    {
+        return a * b;
+    }
+};
+
+int main()
+{
+    pravougaonik x;
+
+    x.ucitavanje();
+    printf("Povrsina je: %10.2f", x.povrsina());
+
+    return 0;
+}

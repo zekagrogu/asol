@@ -1,0 +1,61 @@
+class oblik{
+public:
+virtual void ucitavanje()=0;
+virtual float povrsina()=0;
+virtual ~oblik() {} //mora da ima konstruktor
+};
+
+class pravougaonik:public oblik{
+private:
+    float sirina,duzina;
+    public:
+    void ucitavanje() override
+    {
+        printf("Unesite sirinu:\n");
+        scanf("%f",&sirina);
+        printf("Unesite duzinu:\n");
+        scanf("%f",&duzina);
+    }
+    float povrsina()override
+    {
+        return duzina*sirina;
+    }
+};
+
+class krug:public oblik{
+private:
+    float poluprecnik;
+    public:
+    void ucitavanje() override
+    {
+        printf("Unesite poluprecnik:\n");
+        scanf("%f",&poluprecnik);
+    }
+    float povrsina()override
+    {
+        return poluprecnik*poluprecnik*3.14;
+    }
+};
+
+int main()
+{
+    oblik* x=nullptr;
+    int izbor;
+    printf("Izaberite oblik:\n");
+    printf("1 - Pravougaonik\n");
+    printf("2 - Krug\n");
+    scanf("%d",&izbor);
+    if(izbor==1)
+    {
+        x=new pravougaonik();
+    }
+    if(izbor==2)
+    {
+        x=new krug();
+    }
+    x->ucitavanje();
+
+    printf("Povrsina je: %10.2f\n",x->povrsina());
+    delete x;
+    return 0;
+}

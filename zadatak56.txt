@@ -1,0 +1,51 @@
+class radnik
+{
+public:
+    virtual void ucitavanje() = 0;
+    virtual float plata() = 0;
+    virtual void ispis() = 0;
+};
+
+class prodavac : public radnik
+{
+private:
+    float a, b;
+
+public:
+    void ucitavanje()
+    {
+        printf("Unesi broj sati\n");
+        scanf("%f", &a);
+    }
+
+    float plata()
+    {
+        return a * b;
+    }
+
+    void ispis()
+    {
+        printf("Plata radnika je %.2f", plata());
+    }
+};
+
+int main()
+{
+    int p;
+
+    printf("Izaberi radno mesto\n");
+    printf("1. Prodavac\n");
+    printf("2. Menadzer\n");
+
+    scanf("%d", &p);
+
+    if (p == 1)
+    {
+        prodavac x;
+        x.ucitavanje();
+        x.plata();
+        x.ispis();
+    }
+
+    return 0;
+}

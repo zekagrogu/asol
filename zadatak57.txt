@@ -1,0 +1,87 @@
+class kuca
+{
+public:
+    virtual void ucitavanje() = 0;
+    virtual float obim() = 0;
+    virtual float povrsina() = 0;
+};
+
+class krug : public kuca
+{
+private:
+    float r;
+
+public:
+    void ucitavanje()
+    {
+        printf("Unesi poluprecnik:\n");
+        scanf("%f", &r);
+    }
+
+    float obim()
+    {
+        return 2 * 3.14 * r;
+    }
+
+    float povrsina()
+    {
+        return 3.14 * r * r;
+    }
+};
+
+class pravougaonik : public kuca
+{
+private:
+    float a, b;
+
+public:
+    void ucitavanje()
+    {
+        printf("Unesi stranicu a:\n");
+        scanf("%f", &a);
+
+        printf("Unesi stranicu b:\n");
+        scanf("%f", &b);
+    }
+
+    float obim()
+    {
+        return 2 * (a + b);
+    }
+
+    float povrsina()
+    {
+        return a * b;
+    }
+};
+
+int main()
+{
+    int p;
+
+    printf("Izaberi oblik:\n");
+    printf("1 za krug\n");
+    printf("2 za pravougaonik\n");
+
+    scanf("%d", &p);
+
+    if (p == 1)
+    {
+        krug x;
+
+        x.ucitavanje();
+        printf("Obim je: %10.2f\n", x.obim());
+        printf("Povrsina je: %10.2f\n", x.povrsina());
+    }
+
+    if (p == 2)
+    {
+        pravougaonik x;
+
+        x.ucitavanje();
+        printf("Obim je: %10.2f\n", x.obim());
+        printf("Povrsina je: %10.2f\n", x.povrsina());
+    }
+
+    return 0;
+}

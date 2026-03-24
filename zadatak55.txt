@@ -1,0 +1,59 @@
+Napraviti apstraktnu klasu student koja ima virtuelne funkcije učitavanje, prosek i ispis.
+Napraviti dve klase koje nasleđuju ovu klasu: osnovne_studije, master_studije
+Program treba da omogući izbor tipa studija i ispis prosečne ocene.
+
+class student
+{
+public:
+    virtual void ucitavanje() = 0;
+    virtual float prosek() = 0;
+    virtual void ispis() = 0;
+};
+
+class osnovne_studije : public student
+{
+private:
+    float a, b;
+
+public:
+    void ucitavanje()
+    {
+        printf("Unesi prvu ocenu:\n");
+        scanf("%f", &a);
+
+        printf("Unesi drugu ocenu:\n");
+        scanf("%f", &b);
+    }
+
+    float prosek()
+    {
+        return (a + b) / 2;
+    }
+
+    void ispis()
+    {
+        printf("Prosecna ocena je: %10.2f", prosek());
+    }
+};
+
+int main()
+{
+    int p;
+
+    printf("Izaberi:\n");
+    printf("1 za osnovne studije\n");
+    printf("2 za master studije\n");
+
+    scanf("%d", &p);
+
+    if (p == 1)
+    {
+        osnovne_studije x;
+
+        x.ucitavanje();
+        x.prosek();
+        x.ispis();
+    }
+
+    return 0;
+}

@@ -1,0 +1,64 @@
+class radnik{
+public:
+virtual void ucitavanje()=0;
+virtual float plata()=0;
+virtual ~radnik() {} //mora da ima konstruktor
+};
+
+class prodavac:public radnik{
+private:
+    float a,b;
+public:
+    void ucitavanje() override
+    {
+        printf("Unesite broj sati:\n");
+        scanf("%f",&a);
+        printf("Unesite cenu po satu:\n");
+        scanf("%f",&b);
+    }
+    float plata()override
+    {
+        return a*b;
+    }
+};
+
+class menadzer:public radnik{
+private:
+    float a,b,bonus;
+public:
+    void ucitavanje() override
+    {
+        printf("Unesite broj sati:\n");
+        scanf("%f",&a);
+        printf("Unesite cenu po satu:\n");
+        scanf("%f",&b);
+        printf("Unesite bonus:\n");
+        scanf("%f",&bonus);
+    }
+    float plata()override
+    {
+        return a*b*(1+bonus/100);
+    }
+};
+
+int main()
+{
+    radnik* x=nullptr;
+    int izbor;
+    printf("Izaberite radnika:\n");
+    printf("1 - Prodavac\n");
+    printf("2 - Menadzer\n");
+    scanf("%d",&izbor);
+    if(izbor==1)
+    {
+        x=new prodavac();
+    }
+    if(izbor==2)
+    {
+        x=new menadzer();
+    }
+    x->ucitavanje();
+    printf("Plata je: %10.2f\n",x->plata());
+    delete x;
+    return 0;
+}

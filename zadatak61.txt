@@ -1,0 +1,65 @@
+class student{
+public:
+virtual void ucitavanje()=0;
+virtual float prosek()=0;
+virtual ~student() {} //mora da ima konstruktor
+};
+
+class osnovne:public student{
+
+private:
+    float a,b;
+public:
+    void ucitavanje() override
+    {
+        printf("Unesite prvu ocenu:\n");
+        scanf("%f",&a);
+        printf("Unesite drugu ocenu:\n");
+        scanf("%f",&b);
+    }
+    float prosek()override
+    {
+        return (a+b)/2;
+    }
+};
+
+class master:public student{
+private:
+    float a,b,c;
+public:
+    void ucitavanje() override
+    {
+        printf("Unesite prvu ocenu:\n");
+        scanf("%f",&a);
+        printf("Unesite drugu ocenu:\n");
+        scanf("%f",&b);
+        printf("Unesite trecu ocenu:\n");
+        scanf("%f",&c);
+    }
+    float prosek()override
+    {
+        return (a+b+c)/3;
+    }
+};
+
+int main()
+{
+    student* x=nullptr;
+    int izbor;
+    printf("Izaberite studenta:\n");
+    printf("1 - Osnovne studije\n");
+    printf("2 - Master studije\n");
+    scanf("%d",&izbor);
+    if(izbor==1)
+    {
+        x=new osnovne();
+    }
+    if(izbor==2)
+    {
+        x=new master();
+    }
+    x->ucitavanje();
+    printf("Prosek je: %10.2f\n",x->prosek());
+    delete x;
+    return 0;
+}

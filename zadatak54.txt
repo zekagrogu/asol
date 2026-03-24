@@ -1,0 +1,37 @@
+class radnik
+{
+public:
+    virtual void ucitavanje() = 0;
+    virtual float plata() = 0;
+};
+
+class programer : public radnik
+{
+private:
+    float br, cps;
+
+public:
+    void ucitavanje()
+    {
+        printf("Unesi broj sati:\n");
+        scanf("%f", &br);
+
+        printf("Unesi cenu po satu:\n");
+        scanf("%f", &cps);
+    }
+
+    float plata()
+    {
+        return br * cps;
+    }
+};
+
+int main()
+{
+    programer x;
+
+    x.ucitavanje();
+    printf("Plata radnika je: %10.2f", x.plata());
+
+    return 0;
+}
