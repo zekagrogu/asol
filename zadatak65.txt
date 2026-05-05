@@ -1,0 +1,210 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO;
+
+namespace Kviz
+{
+    public partial class Form1 : Form
+    {
+        public int odgk, odgk1, odgk2, odgk3, odgk4;
+        int p1, p2, p3, p4, p5;
+        public Form1()
+        {
+            InitializeComponent();
+           tabControl1.SelectedTab = tabPage1;
+            tabControl1.Appearance = TabAppearance.FlatButtons;
+            tabControl1.ItemSize = new Size(0, 1);
+            tabControl1.SizeMode = TabSizeMode.Fixed;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab(1);
+            timer1.Start();
+            listBox1.Items.AddRange(File.ReadAllLines(@"pitanja.txt"));
+            button2.PerformClick();
+        }
+        int time = 0;
+        int poeni = 0;
+        int preskoceno = 0;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+           time++;
+            label5.Text = "Vreme:" + time;
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked) p2 = 1;
+            else p2 = 0;
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox3.Checked) p3 = 1;
+            else p3 = 0;
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox4.Checked) p4 = 1;
+            else p4 = 0;
+        }
+       
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox5.Checked) p5 = 1;
+            else p5 = 0;
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int x = listBox1.Items.Count;
+            int brpit = x / 11;
+            Random  z = new Random();
+            int p = z.Next(0,brpit);
+            p = p * 11;
+            label1.Text = listBox1.Items[p].ToString();
+            checkBox1.Text = listBox1.Items[p + 1].ToString();
+            checkBox2.Text = listBox1.Items[p + 2].ToString();
+            checkBox3.Text = listBox1.Items[p + 3].ToString();
+            checkBox4.Text = listBox1.Items[p + 4].ToString();
+            checkBox5.Text = listBox1.Items[p + 5].ToString();
+            odgk = Convert.ToInt16(listBox1.Items[p + 6]);
+            odgk1 = Convert.ToInt16(listBox1.Items[p + 7]);
+            odgk2 = Convert.ToInt16(listBox1.Items[p + 8]);
+            odgk3 = Convert.ToInt16(listBox1.Items[p + 9]);
+            odgk4 = Convert.ToInt16(listBox1.Items[p + 10]);
+            label7.Text = odgk.ToString();
+            label8.Text = odgk1.ToString();
+            label9.Text = odgk2.ToString();
+            label10.Text = odgk3.ToString();
+            label11.Text = odgk4.ToString();
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked) p1 = 1;
+            else p1 = 0;
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            button2.PerformClick();
+            preskoceno++;
+            label6.Text = "Preskocena:" + preskoceno;
+            if (progressBar1.Value < progressBar1.Maximum)
+                progressBar1.Value += 1;
+            else
+            {
+                MessageBox.Show("Kraj kviza sa osvojenih poena:"+poeni);
+                timer1.Stop();
+                Reset();
+                return;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int tacni = 0;
+            bool greska = false;
+            if (p1 == 1 && odgk == 1) tacni++;
+            if (p1 == 1 && odgk == 0) greska = true;
+
+            if (p2 == 1 && odgk1 == 1) tacni++;
+            if (p2 == 1 && odgk1 == 0) greska = true;
+
+            if (p3 == 1 && odgk2 == 1) tacni++;
+            if (p3 == 1 && odgk2 == 0) greska = true;
+
+            if (p4 == 1 && odgk3 == 1) tacni++;
+            if (p4 == 1 && odgk3 == 0) greska = true;
+
+            if (p5 == 1 && odgk4 == 1) tacni++;
+            if (p5 == 1 && odgk4 == 0) greska = true;
+
+            int osvojeniPoeni = 0;
+
+            if (greska)
+            {
+                osvojeniPoeni = -10;
+            }
+
+            if (!greska)
+       
+            {
+                if (tacni == 3)
+                    osvojeniPoeni = 30;
+                else if (tacni == 2)
+                    osvojeniPoeni = 20;
+                else if (tacni == 1)
+                    osvojeniPoeni = 10;
+
+               
+            }
+
+            poeni += osvojeniPoeni;
+
+            label12.Text = "Poeni: " + poeni;
+
+            if (progressBar1.Value < progressBar1.Maximum)
+                progressBar1.Value += 1;
+            else
+            {
+                MessageBox.Show("Kraj kviza sa osvojenih poena:" + poeni);
+                Reset();
+                timer1.Stop();
+                return;
+            }
+            checkBox1.Checked = false;
+            checkBox2.Checked = false;
+            checkBox3.Checked = false;
+            checkBox4.Checked = false;
+            checkBox5.Checked = false;
+            button2.PerformClick();
+        }
+        private void Reset()
+        {
+            timer1.Start();
+            poeni = 0;
+            label12.Text = "Poeni:" + poeni;
+            preskoceno = 0;
+            label6.Text = "Preskocena:" + preskoceno;
+            time = 0;
+            label5.Text = "Vreme:" + preskoceno;
+            progressBar1.Value = 0;
+        }
+    }
+}

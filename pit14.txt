@@ -1,0 +1,251 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO;
+
+namespace servis
+{
+    public partial class Form1 : Form
+    {
+        List<string> izabraneKomponente = new List<string>();
+        List<double> cene = new List<double>();
+       
+
+        public Form1()
+        {
+            InitializeComponent();
+            UcitajPodatke("procesori.txt", checkedListBox1, listBox1);
+            UcitajPodatke("ploca.txt", checkedListBox2, listBox2);
+            UcitajPodatke("diskovi.txt", checkedListBox3, listBox3);
+            UcitajPodatke("memorija.txt", checkedListBox4, listBox4);
+            UcitajPodatke("kuciste.txt", checkedListBox5, listBox5);
+            UcitajPodatke("napajanje.txt", checkedListBox6, listBox6);
+            UcitajPodatke("grafika.txt", checkedListBox7, listBox7);
+
+            tabControl1.Appearance = TabAppearance.FlatButtons;
+            tabControl1.ItemSize = new Size(0, 1);
+            tabControl1.SizeMode = TabSizeMode.Fixed;
+        }
+
+        private void UcitajPodatke(string putanja, CheckedListBox clb, ListBox lb)
+        {
+            var linije = File.ReadAllLines(putanja);
+
+            foreach (var linija in linije)
+            {
+                string[] delovi = linija.Split(';');
+                clb.Items.Add(delovi[0]);
+                lb.Items.Add(delovi[1]);
+            }
+        }
+
+       
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 1;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                if (checkedListBox1.GetItemChecked(i))
+                {
+                    izabraneKomponente.Add(checkedListBox1.Items[i].ToString());
+                    cene.Add(Convert.ToDouble(listBox1.Items[i]));
+                }
+            }
+
+            tabControl1.SelectedIndex = 2;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBox2.Items.Count; i++)
+            {
+                if (checkedListBox2.GetItemChecked(i))
+                {
+                    izabraneKomponente.Add(checkedListBox2.Items[i].ToString());
+                    cene.Add(Convert.ToDouble(listBox2.Items[i]));
+                }
+            }
+
+            tabControl1.SelectedIndex = 3;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBox3.Items.Count; i++)
+            {
+                if (checkedListBox3.GetItemChecked(i))
+                {
+                    izabraneKomponente.Add(checkedListBox3.Items[i].ToString());
+                    cene.Add(Convert.ToDouble(listBox3.Items[i]));
+                }
+            }
+
+            tabControl1.SelectedIndex = 4;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBox4.Items.Count; i++)
+            {
+                if (checkedListBox4.GetItemChecked(i))
+                {
+                    izabraneKomponente.Add(checkedListBox4.Items[i].ToString());
+                    cene.Add(Convert.ToDouble(listBox4.Items[i]));
+                }
+            }
+
+            tabControl1.SelectedIndex = 5;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBox5.Items.Count; i++)
+            {
+                if (checkedListBox5.GetItemChecked(i))
+                {
+                    izabraneKomponente.Add(checkedListBox5.Items[i].ToString());
+                    cene.Add(Convert.ToDouble(listBox5.Items[i]));
+                }
+            }
+
+            tabControl1.SelectedIndex = 6;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBox6.Items.Count; i++)
+            {
+                if (checkedListBox6.GetItemChecked(i))
+                {
+                    izabraneKomponente.Add(checkedListBox6.Items[i].ToString());
+                    cene.Add(Convert.ToDouble(listBox6.Items[i]));
+                }
+            }
+
+            tabControl1.SelectedIndex = 7;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBox7.Items.Count; i++)
+            {
+                if (checkedListBox7.GetItemChecked(i))
+                {
+                    izabraneKomponente.Add(checkedListBox7.Items[i].ToString());
+                    cene.Add(Convert.ToDouble(listBox7.Items[i]));
+                }
+            }
+
+            tabControl1.SelectedIndex = 8;
+        }
+
+       
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+           
+                using (StreamWriter sw = new StreamWriter("racunar.txt"))
+                {
+                    for (int i = 0; i < izabraneKomponente.Count; i++)
+                    {
+                        sw.WriteLine(izabraneKomponente[i] + ";" + cene[i]);
+                    }
+                }
+
+                MessageBox.Show("Sačuvano!");
+           
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+           
+                izabraneKomponente.Clear();
+                cene.Clear();
+
+                foreach (TabPage tab in tabControl1.TabPages)
+                {
+                    foreach (Control ctrl in tab.Controls)
+                    {
+                        if (ctrl is CheckedListBox clb)
+                        {
+                            for (int i = 0; i < clb.Items.Count; i++)
+                                clb.SetItemChecked(i, false);
+                        }
+                    }
+                }
+
+                tabControl1.SelectedIndex = 0;
+           
+        }
+
+        private void tabControl1_Enter(object sender, EventArgs e)
+        {
+           
+               
+           
+        }
+
+        private void tabPage9_Enter(object sender, EventArgs e)
+        {
+            listBox8.Items.Clear();
+            listBox9.Items.Clear();
+
+            double suma = 0;
+
+            for (int i = 0; i < izabraneKomponente.Count; i++)
+            {
+                listBox8.Items.Add(izabraneKomponente[i]);
+                listBox9.Items.Add(cene[i]);
+                suma += cene[i];
+            }
+
+            label1.Text = "Ukupno: " + suma.ToString() + " RSD";
+        }
+
+        private void tabPage7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkedListBox5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkedListBox7_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox7_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
+}

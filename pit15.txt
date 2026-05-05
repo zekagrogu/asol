@@ -1,0 +1,279 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO;
+
+namespace Ucenici
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+            tabControl1.Appearance = TabAppearance.FlatButtons;
+            tabControl1.ItemSize = new Size(0, 1);
+            tabControl1.SizeMode = TabSizeMode.Fixed;
+        }
+
+        public class Ucenik
+        {
+            public string Ime { get; set; }
+            public string Prezime { get; set; }
+            public int[] Ocene { get; set; }
+
+            public double Prosek()
+            {
+                return Ocene.Average();
+            }
+        }
+
+        private void OsveziListView()
+        {
+            listView1.Items.Clear();
+
+            double sumaProseka = 0;
+
+            foreach (string linija in listBox1.Items)
+            {
+                string[] delovi = linija.Split('|');
+
+                string ime = delovi[0];
+                string prezime = delovi[1];
+
+                int[] ocene = new int[6];
+                for (int i = 0; i < 6; i++)
+                {
+                    ocene[i] = int.Parse(delovi[i + 2]);
+                }
+
+                double prosek = ocene.Average();
+                sumaProseka += prosek;
+
+                ListViewItem item = new ListViewItem(ime);
+                item.SubItems.Add(prezime);
+
+                foreach (int oc in ocene)
+                {
+                    item.SubItems.Add(oc.ToString());
+                }
+
+                item.SubItems.Add(prosek.ToString("0.00"));
+                if (prosek >= 3.0)
+                    item.BackColor = Color.LightGreen;
+                else if (prosek < 3.0)
+                    item.BackColor = Color.LightCoral;
+
+                listView1.Items.Add(item);
+            }
+
+            if (listView1.Items.Count > 0)
+            {
+                double prosekOdeljenja = sumaProseka / listView1.Items.Count;
+                label1.Text = "Prosek odeljenja: " + prosekOdeljenja.ToString("0.00");
+            }
+
+           
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+       
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           
+                string linija = textBox1.Text + "|" + textBox2.Text +
+                    "|" + textBox3.Text +
+                    "|" + textBox4.Text +
+                    "|" + textBox5.Text +
+                    "|" + textBox6.Text +
+                    "|" + textBox8.Text +
+                    "|" + textBox9.Text;
+
+                listBox1.Items.Add(linija);
+
+                OsveziListView();
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+            textBox5.Text = "";
+            textBox6.Text = "";
+            textBox8.Text = "";
+            textBox9.Text = "";
+
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+                listBox1.Items.Clear();
+                listView1.Items.Clear();
+
+                string[] linije = File.ReadAllLines("ucenici.txt");
+
+                foreach (string linija in linije)
+                {
+                    listBox1.Items.Add(linija);
+                }
+
+                double sumaProseka = 0;
+
+                foreach (string linija in listBox1.Items)
+                {
+                    string[] delovi = linija.Split('|');
+
+                    string ime = delovi[0];
+                    string prezime = delovi[1];
+
+                    int[] ocene = new int[6];
+                    for (int i = 0; i < 6; i++)
+                    {
+                        ocene[i] = int.Parse(delovi[i + 2]);
+                    }
+
+                    double prosek = ocene.Average();
+                    sumaProseka += prosek;
+
+                    ListViewItem item = new ListViewItem(ime);
+                    item.SubItems.Add(prezime);
+
+                    foreach (int oc in ocene)
+                    {
+                        item.SubItems.Add(oc.ToString());
+                    }
+
+                    item.SubItems.Add(prosek.ToString("0.00"));
+                item.SubItems.Add(prosek.ToString("0.00"));
+                if (prosek >= 3.0)
+                    item.BackColor = Color.LightGreen;
+                else if (prosek < 3.0)
+                    item.BackColor = Color.LightCoral;
+                listView1.Items.Add(item);
+                }
+
+                double prosekOdeljenja = sumaProseka / listView1.Items.Count;
+                label1.Text = "Prosek odeljenja: " + prosekOdeljenja.ToString("0.00");
+           
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+           
+                if (listBox1.SelectedIndex == -1) return;
+
+                string linija = textBox1.Text + "|" + textBox2.Text +
+                    "|" + textBox3.Text +
+                    "|" + textBox4.Text +
+                    "|" + textBox5.Text +
+                    "|" + textBox6.Text +
+                    "|" + textBox8.Text +
+                    "|" + textBox9.Text;
+
+                listBox1.Items[listBox1.SelectedIndex] = linija;
+
+                OsveziListView();
+           
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+           
+                if (listBox1.SelectedIndex != -1)
+                {
+                    listBox1.Items.RemoveAt(listBox1.SelectedIndex);
+
+                    OsveziListView();
+                }
+
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+            textBox5.Text = "";
+            textBox6.Text = "";
+            textBox8.Text = "";
+            textBox9.Text = "";
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+           
+                List<string> linije = new List<string>();
+
+                foreach (string item in listBox1.Items)
+                {
+                    linije.Add(item);
+                }
+
+                File.WriteAllLines("ucenici.txt", linije);
+
+                MessageBox.Show("Sačuvao sam podatke!!");
+            }
+
+        private void listView1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (listView1.SelectedIndices.Count > 0)
+            {
+                listBox1.SelectedIndex = listView1.SelectedIndices[0];
+            }
+            if (listView1.SelectedItems.Count == 0) return;
+
+            ListViewItem item = listView1.SelectedItems[0];
+
+            textBox1.Text = item.SubItems[0].Text;
+            textBox2.Text = item.SubItems[1].Text;
+
+            textBox3.Text = item.SubItems[2].Text;
+            textBox4.Text = item.SubItems[3].Text;
+            textBox5.Text = item.SubItems[4].Text;
+            textBox6.Text = item.SubItems[5].Text;
+            textBox8.Text = item.SubItems[6].Text;
+            textBox9.Text = item.SubItems[7].Text;
+
+            listBox1.SelectedIndex = item.Index;
+        }
+
+        private void listBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex == -1) return;
+
+            string linija = listBox1.SelectedItem.ToString();
+            string[] delovi = linija.Split('|');
+
+            textBox1.Text = delovi[0];
+            textBox2.Text = delovi[1];
+            textBox3.Text = delovi[2];
+            textBox4.Text = delovi[3];
+            textBox5.Text = delovi[4];
+            textBox6.Text = delovi[5];
+            textBox8.Text = delovi[6];
+            textBox9.Text = delovi[7];
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 1;
+        }
+    }
+}

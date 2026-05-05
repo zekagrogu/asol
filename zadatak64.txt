@@ -1,0 +1,395 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO;
+
+namespace tictactou
+{
+    public partial class Form1 : Form
+    {
+        char[] tabla = new char[9];
+        char igrac = 'X';
+        bool igraGotova = false;
+        Stack<int> potezi = new Stack<int>();
+        public Form1()
+        {
+            InitializeComponent();
+            KreirajTablu8x8();
+            tabControl1.SelectedTab = tabPage1;
+            tabControl1.Appearance = TabAppearance.FlatButtons;
+            tabControl1.ItemSize = new Size(0, 1);
+            tabControl1.SizeMode = TabSizeMode.Fixed;
+        }
+
+        private void suggestAMoveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void novaIgraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 1;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 2;
+        }
+
+        private void KlikPolja(int index, Button btn)
+        {
+            if (igraGotova) return;
+
+            if (tabla[index] == '\0')
+            {
+                tabla[index] = igrac;
+                btn.Text = igrac.ToString();
+                btn.Enabled = false;
+
+                if (ProveriPobedu())
+                {
+                    MessageBox.Show("Pobednik: " + igrac);
+                   
+                    tabControl1.SelectedIndex = 0;
+                    return;
+                }
+                potezi.Push(index);
+
+                igrac = (igrac == 'X') ? 'O' : 'X';
+            }
+        }
+
+        private bool ProveriPobedu()
+        {
+            int[,] win = {
+        {0,1,2},{3,4,5},{6,7,8},
+        {0,3,6},{1,4,7},{2,5,8},
+        {0,4,8},{2,4,6}
+    };
+
+            for (int i = 0; i < win.GetLength(0); i++)
+            {
+                if (tabla[win[i, 0]] != '\0' &&
+                    tabla[win[i, 0]] == tabla[win[i, 1]] &&
+                    tabla[win[i, 1]] == tabla[win[i, 2]])
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+       
+
+        char[,] tabla8 = new char[8, 8];
+
+        Button[,] dugmad = new Button[8, 8];
+
+        private void KreirajTablu8x8()
+        {
+            int size = 45; // veća dugmad
+            int offsetX = 190; // centriranje horizontalno
+            int offsetY = 30;  // centriranje vertikalno
+
+            dugmad = new Button[8, 8];
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    dugmad[i, j] = new Button();
+
+                    dugmad[i, j].Width = size;
+                    dugmad[i, j].Height = size;
+
+                    dugmad[i, j].Location = new Point(
+                        offsetX + j * size,
+                        offsetY + i * size
+                    );
+
+                    // 💜
+                    dugmad[i, j].BackColor = Color.LightYellow;
+                    dugmad[i, j].ForeColor = Color.Blue;
+                   
+                    dugmad[i, j].FlatStyle = FlatStyle.Flat;
+                    dugmad[i, j].FlatAppearance.BorderColor = Color.Blue;
+                    dugmad[i, j].FlatAppearance.BorderSize = 1;
+
+                    int x = i, y = j;
+
+                    dugmad[i, j].Click += (s, e) =>
+                    {
+                        Klik8(x, y, dugmad[x, y]);
+                    };
+
+                    tabPage3.Controls.Add(dugmad[i, j]);
+                }
+            }
+        }
+
+
+
+        private void Klik8(int i, int j, Button btn)
+            {
+                if (igraGotova) return;
+
+                int kolona = j;
+
+                // tražimo odozdo prvo slobodno mesto
+                for (int red = 7; red >= 0; red--)
+                {
+                    if (tabla8[red, kolona] == '\0')
+                    {
+                        tabla8[red, kolona] = igrac;
+                        dugmad[red, kolona].Text = igrac.ToString();
+                        dugmad[red, kolona].Enabled = false;
+
+                        if (Proveri4(red, kolona))
+                        {
+                            MessageBox.Show("Pobednik: " + igrac);
+                         
+                            tabControl1.SelectedIndex = 0;
+                            return;
+                        }
+
+                        igrac = (igrac == 'X') ? 'O' : 'X';
+                   
+                    return;
+                    }
+                }
+
+                MessageBox.Show("Kolona je puna!");
+            }
+
+           
+
+
+        private bool Proveri4(int x, int y)
+        {
+            return ProveriPravac(x, y, 1, 0) || // horizontalno
+                   ProveriPravac(x, y, 0, 1) || // vertikalno
+                   ProveriPravac(x, y, 1, 1) || // dijagonala
+                   ProveriPravac(x, y, 1, -1);  // druga dijagonala
+        }
+
+        private bool ProveriPravac(int x, int y, int dx, int dy)
+        {
+            char p = tabla8[x, y];
+            int count = 1;
+
+            for (int i = 1; i < 4; i++)
+            {
+                int nx = x + dx * i;
+                int ny = y + dy * i;
+
+                if (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 &&
+                    tabla8[nx, ny] == p)
+                    count++;
+                else break;
+            }
+
+            for (int i = 1; i < 4; i++)
+            {
+                int nx = x - dx * i;
+                int ny = y - dy * i;
+
+                if (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 &&
+                    tabla8[nx, ny] == p)
+                    count++;
+                else break;
+            }
+
+            return count >= 4;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            KlikPolja(2, btn2);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            KlikPolja(5, btn5);
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            KlikPolja(8, btn8);
+        }
+
+        private void btn0_Click(object sender, EventArgs e)
+        {
+           
+                KlikPolja(0, btn0);
+           
+        }
+
+        private void btn1_Click(object sender, EventArgs e)
+        {
+            KlikPolja(1, btn1);
+        }
+
+        private void btn3_Click(object sender, EventArgs e)
+        {
+            KlikPolja(3, btn3);
+        }
+
+        private void btn4_Click(object sender, EventArgs e)
+        {
+            KlikPolja(4, btn4);
+        }
+
+        private void btn6_Click(object sender, EventArgs e)
+        {
+            KlikPolja(6, btn6);
+        }
+
+        private void btn7_Click(object sender, EventArgs e)
+        {
+            KlikPolja(7, btn7);
+        }
+
+        private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // reset 3x3
+            tabla = new char[9];
+            igrac = 'X';
+            igraGotova = false;
+
+            foreach (Control c in tabPage2.Controls)
+            {
+                if (c is Button btn)
+                {
+                    btn.Text = "";
+                    btn.Enabled = true;
+                }
+            }
+
+            // reset 8x8
+            tabla8 = new char[8, 8];
+            igrac = 'X';
+            igraGotova = false;
+
+            foreach (Control c in tabPage3.Controls)
+            {
+                if (c is Button btn)
+                {
+                    btn.Text = "";
+                    btn.Enabled = true;
+                }
+            }
+
+            tabControl1.SelectedIndex = 0;
+        }
+
+        private void newGameToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            // reset 3x3
+            tabla = new char[9];
+            igrac = 'X';
+            igraGotova = false;
+
+            foreach (Control c in tabPage2.Controls)
+            {
+                if (c is Button btn)
+                {
+                    btn.Text = "";
+                    btn.Enabled = true;
+                }
+            }
+
+            // reset 8x8
+            tabla8 = new char[8, 8];
+            igrac = 'X';
+            igraGotova = false;
+
+            foreach (Control c in tabPage3.Controls)
+            {
+                if (c is Button btn)
+                {
+                    btn.Text = "";
+                    btn.Enabled = true;
+                }
+            }
+
+            tabControl1.SelectedIndex = 0;
+        }
+
+        private void backToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+                if (potezi.Count > 0 && !igraGotova)
+                {
+                    int index = potezi.Pop();
+                    tabla[index] = '\0';
+
+                    foreach (Control c in tabPage2.Controls)
+                    {
+                        if (c is Button btn && btn.Name == "btn" + index)
+                        {
+                            btn.Text = "";
+                            btn.Enabled = true;
+                        }
+                    }
+
+                    igrac = (igrac == 'X') ? 'O' : 'X';
+               
+            }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+                string stanje = new string(tabla);
+                File.WriteAllText("save.txt", stanje);
+                MessageBox.Show("Igra sačuvana!");
+           
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void aBOUTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+         
+            MessageBox.Show("Autor: Valentina Ilic");
+        }
+
+        private void novaIgraToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+      "X-O igra:\n\n" +
+      "- Igraju X i O naizmenično\n" +
+      "- 3 u nizu pobeda (3x3)\n" +
+      "- 4 u nizu pobeda (8x8)\n" +
+      "- Klikom se bira polje\n"
+  );
+
+
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}

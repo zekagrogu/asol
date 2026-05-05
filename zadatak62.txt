@@ -1,0 +1,175 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO;
+
+namespace listview
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            int x = listView1.FocusedItem.Index;
+            listView1.Items.RemoveAt(x);
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            button2.PerformClick();
+            button1.PerformClick();
+        }
+
+       
+
+            private void button4_Click(object sender, EventArgs e)
+            {
+                if (listView1.SelectedItems.Count == 0)
+                {
+                    MessageBox.Show("Izaberi stavku za izmenu!");
+                    return;
+                }
+
+                ListViewItem item = listView1.SelectedItems[0];
+
+                item.SubItems[1].Text = textBox1.Text;
+                item.SubItems[2].Text = textBox2.Text;
+                item.SubItems[3].Text = textBox3.Text;
+
+                double z1, z2;
+
+                if (double.TryParse(textBox2.Text, out z1) && double.TryParse(textBox3.Text, out z2))
+                {
+                    double proizvod = z1 * z2;
+                    item.SubItems[4].Text = proizvod.ToString();
+                }
+               
+
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
+            }
+       
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int x = listView1.Items.Count;
+            x++;
+            string s0 = Convert.ToString(x);
+            string s1 = textBox1.Text;
+            string s2 = textBox2.Text;
+            string s3 = textBox3.Text;
+            double z1 = Convert.ToDouble(s2);
+            double z2 = Convert.ToDouble(s3);
+            double proizvod = z1 * z2;
+            string s4 = Convert.ToString(proizvod);
+            string[] zapis = { s0, s1, s2, s3, s4 };
+            var red = new ListViewItem(zapis);
+            listView1.Items.Add(red);
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            button2.PerformClick();
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listView1_Click(object sender, EventArgs e)
+        {
+            int x = listView1.FocusedItem.Index;
+            textBox1.Text = listView1.Items[x].SubItems[1].Text;
+            textBox2.Text = listView1.Items[x].SubItems[2].Text;
+            textBox3.Text = listView1.Items[x].SubItems[3].Text;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int x = listView1.Items.Count;
+            for(int i=0;i<x;i++)
+            {
+                listView1.Items[i].SubItems[0].Text = Convert.ToString(i + 1);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            double zbir = 0;
+            int x = listView1.Items.Count;
+            for (int i = 0; i < x; i++) {
+                double sabirak = Convert.ToDouble(listView1.Items[i].SubItems[4].Text);
+                zbir += sabirak;
+            }
+            label4.Text = Convert.ToString(zbir);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.AddRange(File.ReadAllLines(@"prilog.txt"));
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            listView1.Items.Clear();
+
+            int redniBroj = 1;
+
+            for (int i = 0; i < listBox1.Items.Count; i += 4)
+            {
+                if (i + 3 < listBox1.Items.Count)
+                {
+                    ListViewItem item = new ListViewItem(redniBroj.ToString());
+
+                    item.SubItems.Add(listBox1.Items[i].ToString());     // Naziv artikla
+                    item.SubItems.Add(listBox1.Items[i + 1].ToString()); // Količina
+                    item.SubItems.Add(listBox1.Items[i + 2].ToString()); // Merna jedinica
+                    item.SubItems.Add(listBox1.Items[i + 3].ToString()); // Cena
+
+                    listView1.Items.Add(item);
+
+                    redniBroj++;
+                }
+            }
+            listBox1.Items.Clear();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+           
+                listBox1.Items.Clear();
+
+                // 1. Prebacivanje iz ListView u ListBox
+                foreach (ListViewItem item in listView1.Items)
+                {
+                    listBox1.Items.Add(item.SubItems[1].Text); // Naziv
+                    listBox1.Items.Add(item.SubItems[2].Text); // Količina
+                    listBox1.Items.Add(item.SubItems[3].Text); // Merna jedinica
+                    listBox1.Items.Add(item.SubItems[4].Text); // Cena
+                }
+
+                // 2. Snimanje u fajl
+                string putanja = "putanja.txt";
+
+                using (StreamWriter sw = new StreamWriter(putanja))
+                {
+                    foreach (var stavka in listBox1.Items)
+                    {
+                        sw.WriteLine(stavka.ToString());
+                    }
+                }
+
+                MessageBox.Show("Podaci su uspešno sačuvani!");
+           
+        }
+    }

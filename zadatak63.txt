@@ -1,0 +1,159 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace WindowsFormsApp1
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           
+                listBox1.Items.Clear();
+            button2.PerformClick();
+
+            // OSOBA 1
+            string ime1 = textBox1.Text + " " + textBox2.Text;
+                DateTime rodjenje1 = dateTimePicker1.Value.Date + dateTimePicker2.Value.TimeOfDay;
+
+                // OSOBA 2
+                string ime2 = textBox3.Text + " " + textBox4.Text;
+                DateTime rodjenje2 = dateTimePicker3.Value.Date + dateTimePicker4.Value.TimeOfDay;
+
+                // DANAS
+                DateTime danas = dateTimePicker5.Value.Date;
+
+                // broj dana od rodjenja
+                int dani1 = (danas - rodjenje1).Days;
+                int dani2 = (danas - rodjenje2).Days;
+
+                // BIORITAM OSOBA 1
+                double fiz1 = Math.Sin(2 * Math.PI * dani1 / 23) * 100;
+                double emo1 = Math.Sin(2 * Math.PI * dani1 / 28) * 100;
+                double psi1 = Math.Sin(2 * Math.PI * dani1 / 33) * 100;
+                double int1 = Math.Sin(2 * Math.PI * dani1 / 38) * 100;
+            double est1 = Math.Sin(2 * Math.PI * dani1 / 43) * 100;
+            double sve1 = Math.Sin(2 * Math.PI * dani1 / 48) * 100;
+            double duh1 = Math.Sin(2 * Math.PI * dani1 / 53) * 100;
+
+            // BIORITAM OSOBA 2
+            double fiz2 = Math.Sin(2 * Math.PI * dani2 / 23) * 100;
+                double emo2 = Math.Sin(2 * Math.PI * dani2 / 28) * 100;
+                double psi2 = Math.Sin(2 * Math.PI * dani2 / 33) * 100;
+            double int2 = Math.Sin(2 * Math.PI * dani2 / 38) * 100;
+            double est2 = Math.Sin(2 * Math.PI * dani2 / 43) * 100;
+            double sve2 = Math.Sin(2 * Math.PI * dani1 / 48) * 100;
+            double duh2 = Math.Sin(2 * Math.PI * dani2 / 53) * 100;
+
+            // ISPIS OSOBA 1
+            listBox1.Items.Add("=== OSOBA 1: " + ime1 + " ===");
+                listBox1.Items.Add("Fizicki: " + fiz1.ToString("F2") + "%");
+                listBox1.Items.Add("Emotivni: " + emo1.ToString("F2") + "%");
+                listBox1.Items.Add("Psiholoski: " + psi1.ToString("F2") + "%");
+            listBox1.Items.Add("Intuicija: " + int1.ToString("F2") + "%");
+            listBox1.Items.Add("Estetski: " + est1.ToString("F2") + "%");
+            listBox1.Items.Add("Svesnost: " + sve1.ToString("F2") + "%");
+            listBox1.Items.Add("Duhovno: " + duh1.ToString("F2") + "%");
+
+
+            listBox1.Items.Add("");
+
+                // ISPIS OSOBA 2
+                listBox1.Items.Add("=== OSOBA 2: " + ime2 + " ===");
+                listBox1.Items.Add("Fizicki: " + fiz2.ToString("F2") + "%");
+                listBox1.Items.Add("Emotivni: " + emo2.ToString("F2") + "%");
+                listBox1.Items.Add("Psiholoski: " + psi2.ToString("F2") + "%");
+            listBox1.Items.Add("Intuicija: " + int2.ToString("F2") + "%");
+            listBox1.Items.Add("Estetski: " + est2.ToString("F2") + "%");
+            listBox1.Items.Add("Svesnost: " + sve2.ToString("F2") + "%");
+            listBox1.Items.Add("Duhovno: " + duh2.ToString("F2") + "%");
+
+            listBox1.Items.Add("");
+
+                // KOMPATIBILNOST
+                double ukupno1 = Math.Abs(fiz1 - fiz2);
+                double ukupno2 = Math.Abs(emo1 + emo2);
+            double ukupno3 = Math.Abs(psi1 + psi2);
+            double ukupno4 = Math.Abs(int1 + int2);
+            double ukupno5 = Math.Abs(est1 + est2);
+            double ukupno6 = Math.Abs(sve1 + sve2);
+            double ukupno7 = Math.Abs(duh1 + duh2);
+
+            double razlika = Math.Round((Math.Abs(ukupno1+ukupno2+ukupno3+ ukupno4+ ukupno5+ ukupno6+ ukupno7) /7),2);
+
+                if (razlika > 50)
+                {
+                    listBox1.Items.Add("Danasnji odnos: TOP PRICA (:");
+                listBox1.Items.Add(razlika.ToString()+"%");
+            }
+                else
+                {
+                    listBox1.Items.Add("Danasnji odnos: HAOS ):");
+                listBox1.Items.Add(razlika.ToString() + "%");
+               
+            }
+           
+               
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+            listBox1.Items.Clear();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+           
+                DateTime izabraniDatum = dateTimePicker1.Value;
+                DayOfWeek dan = izabraniDatum.DayOfWeek;
+
+                textBox5.Text = dan.ToString();
+
+            DateTime izabraniDatum1 = dateTimePicker3.Value;
+            DayOfWeek dan1 = izabraniDatum1.DayOfWeek;
+
+            textBox6.Text = dan1.ToString();
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker5_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
